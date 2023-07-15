@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/jefgodesky/w3c-design-tokenizer/issues"
   },
-  "homepage": "https://github.com/jefgodesky/w3c-design-tokenizer#readme"
+  "homepage": "https://github.com/jefgodesky/w3c-design-tokenizer#readme",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
 }

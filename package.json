@@ -1,0 +1,23 @@
+{
+  "name": "w3c-design-tokenizer",
+  "version": "0.0.1",
+  "description": "A tool for working with W3C Design Token JSON files.",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jefgodesky/w3c-design-tokenizer.git"
+  },
+  "author": {
+    "name": "Jason Godesky",
+    "email": "jason@godesky.net",
+    "url": "https://jason.godesky.net"
+  },
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/jefgodesky/w3c-design-tokenizer/issues"
+  },
+  "homepage": "https://github.com/jefgodesky/w3c-design-tokenizer#readme"
+}

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "mocha",
-    "lint": "ts-standard"
+    "lint": "ts-standard",
+    "check": "npm-run-all lint test"
   },
   "repository": {
     "type": "git",

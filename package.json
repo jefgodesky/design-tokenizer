@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A tool for working with W3C Design Token JSON files.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": ""
   },

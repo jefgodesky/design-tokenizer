@@ -8,8 +8,9 @@ interface TransitionToken extends Dictionary {
 }
 
 const isTransitionToken = (obj: any): obj is TransitionToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'transition' && (isTransition($value) || isReference($value))
 }
 

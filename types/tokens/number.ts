@@ -7,8 +7,9 @@ interface NumberToken extends Dictionary {
 }
 
 const isNumberToken = (obj: any): obj is NumberToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'number' && (typeof $value === 'number' || isReference($value))
 }
 

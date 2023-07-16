@@ -8,8 +8,10 @@ interface GradientToken extends Dictionary {
 }
 
 const isGradientToken = (obj: any): obj is GradientToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
+
   const checks: boolean[] = Array.isArray($value)
     ? $value.map(stop => isGradientStop(stop))
     : [false]

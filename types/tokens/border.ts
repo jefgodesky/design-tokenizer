@@ -8,8 +8,9 @@ interface BorderToken extends Dictionary {
 }
 
 const isBorderToken = (obj: any): obj is BorderToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'border' && (isBorder($value) || isReference($value))
 }
 

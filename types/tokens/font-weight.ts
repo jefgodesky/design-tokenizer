@@ -8,8 +8,9 @@ interface FontWeightToken extends Dictionary {
 }
 
 const isFontWeightToken = (obj: any): obj is FontWeightToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'fontWeight' && (isFontWeight($value) || isReference($value))
 }
 

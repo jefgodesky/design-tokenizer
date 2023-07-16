@@ -9,8 +9,9 @@ interface StrokeStyleToken extends Dictionary {
 }
 
 const isStrokeStyleToken = (obj: any): obj is StrokeStyleToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'strokeStyle' && (isStrokeStyleString($value) || isStrokeStyleObject($value) || isReference($value))
 }
 

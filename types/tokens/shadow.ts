@@ -8,8 +8,9 @@ interface ShadowToken extends Dictionary {
 }
 
 const isShadowToken = (obj: any): obj is ShadowToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'shadow' && (isShadow($value) || isReference($value))
 }
 

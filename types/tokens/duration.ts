@@ -8,8 +8,9 @@ interface DurationToken extends Dictionary {
 }
 
 const isDurationToken = (obj: any): obj is DurationToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'duration' && (isDuration($value) || isReference($value))
 }
 

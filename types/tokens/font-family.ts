@@ -8,8 +8,9 @@ interface FontFamilyToken extends Dictionary {
 }
 
 const isFontFamilyToken = (obj: any): obj is FontFamilyToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'fontFamily' && (isFontFamily($value) || isReference($value))
 }
 

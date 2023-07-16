@@ -8,8 +8,9 @@ interface TypographyToken extends Dictionary {
 }
 
 const isTypographyToken = (obj: any): obj is TypographyToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'typography' && (isTypography($value) || isReference($value))
 }
 

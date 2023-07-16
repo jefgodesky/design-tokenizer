@@ -181,5 +181,9 @@ describe('Dictionary', () => {
     it('returns true when given an object with a dictionary property', () => {
       expect(isDictionary({ dict })).to.equal(true)
     })
+
+    it('returns false when given a key that starts with $', () => {
+      expect(isDictionary({ $value: 1 })).to.equal(false)
+    })
   })
 })

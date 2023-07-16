@@ -1,5 +1,7 @@
+type DictionaryKey = Exclude<string, `$${string}`>
+
 interface Dictionary {
-  [key: string]: Dictionary | string | number | boolean | Dictionary[] | string[] | number[] | boolean[]
+  [key: DictionaryKey]: Dictionary | string | number | boolean | Dictionary[] | string[] | number[] | boolean[]
 }
 
 const isDictionaryValue = (obj: any): boolean => {
@@ -12,7 +14,8 @@ const isDictionaryValue = (obj: any): boolean => {
 
 const isDictionary = (obj: any): obj is Dictionary => {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) return false
-  return Object.keys(obj).reduce((acc, curr) => acc && isDictionaryValue(obj[curr]), true)
+  const checks: boolean[] = Object.keys(obj).map(key => !key.startsWith('$') && isDictionaryValue(obj[key]))
+  return checks.reduce((acc, curr) => acc && curr, true)
 }
 
 export default Dictionary

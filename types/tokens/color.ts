@@ -8,8 +8,9 @@ interface ColorToken extends Dictionary {
 }
 
 const isColorToken = (obj: any): obj is ColorToken => {
-  if (!isDictionary(obj)) return false
-  const { $type, $value } = obj
+  if (obj === undefined || obj === null) return false
+  const { $type, $value, ...dict } = obj
+  if (!isDictionary(dict)) return false
   return $type === 'color' && (isColorHex($value) || isReference($value))
 }
 

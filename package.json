@@ -9,6 +9,9 @@
     "lint": "ts-standard",
     "check": "npm-run-all lint test"
   },
+  "pre-commit": [
+    "check"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jefgodesky/w3c-design-tokenizer.git"

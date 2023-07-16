@@ -1,9 +1,9 @@
-interface StrokeStyleType {
+interface StrokeStyleObject {
   dashArray: string[]
   lineCap: 'round' | 'butt' | 'square'
 }
 
-const isStrokeStyleType = (obj: any): obj is StrokeStyleType => {
+const isStrokeStyleObject = (obj: any): obj is StrokeStyleObject => {
   if (obj === null || obj === undefined) return false
   const lineCaps = ['round', 'butt', 'square']
   const { dashArray, lineCap } = obj
@@ -12,5 +12,5 @@ const isStrokeStyleType = (obj: any): obj is StrokeStyleType => {
   return dashArray.reduce((acc: boolean, curr: any) => acc && typeof curr === 'string', true)
 }
 
-export default StrokeStyleType
-export { isStrokeStyleType }
+export default StrokeStyleObject
+export { isStrokeStyleObject }

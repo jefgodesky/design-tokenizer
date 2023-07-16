@@ -1,4 +1,4 @@
-type DictionaryKey = Exclude<string, `$${string}`>
+import DictionaryKey, { isDictionaryKey } from './dictionary-key.js'
 
 interface Dictionary {
   [key: DictionaryKey]: Dictionary | string | number | boolean | Dictionary[] | string[] | number[] | boolean[]
@@ -14,7 +14,7 @@ const isDictionaryValue = (obj: any): boolean => {
 
 const isDictionary = (obj: any): obj is Dictionary => {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) return false
-  const checks: boolean[] = Object.keys(obj).map(key => !key.startsWith('$') && isDictionaryValue(obj[key]))
+  const checks: boolean[] = Object.keys(obj).map(key => isDictionaryKey(key) && isDictionaryValue(obj[key]))
   return checks.reduce((acc, curr) => acc && curr, true)
 }
 

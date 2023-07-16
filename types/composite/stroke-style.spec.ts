@@ -108,6 +108,10 @@ describe('isStrokeStyleObject', () => {
     expect(isStrokeStyleObject({ dashArray, lineChap: 'test' })).to.equal(false)
   })
 
+  it('returns false when given invalid strings for dashArray', () => {
+    expect(isStrokeStyleObject({ dashArray: ['hello', 'world'], lineCap: 'round' })).to.equal(false)
+  })
+
   it('returns false when given an array for lineCap', () => {
     expect(isStrokeStyleObject({ dashArray, lineChap: [] })).to.equal(false)
   })

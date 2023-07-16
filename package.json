@@ -7,6 +7,7 @@
   "scripts": {
     "test": "mocha",
     "lint": "ts-standard",
+    "lint:fix": "ts-standard --fix",
     "check": "npm-run-all lint test"
   },
   "pre-commit": [

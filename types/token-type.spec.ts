@@ -115,6 +115,10 @@ describe('TokenType', () => {
   })
 
   describe('isTokenType', () => {
+    it('returns false when given undefined', () => {
+      expect(isTokenType(undefined)).to.equal(false)
+    })
+
     it('returns false when given null', () => {
       expect(isTokenType(null)).to.equal(false)
     })

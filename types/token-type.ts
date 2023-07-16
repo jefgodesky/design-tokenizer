@@ -20,5 +20,10 @@ const getTokenTypes = (obj: { [key: string]: any } = TokenType): string[] => {
   return Object.values(obj).flatMap(val => typeof val === 'string' ? val : getTokenTypes(val))
 }
 
+const isTokenType = (candidate: any): boolean => {
+  const types = getTokenTypes()
+  return types.includes(candidate)
+}
+
 export default TokenType
-export { getTokenTypes }
+export { getTokenTypes, isTokenType }

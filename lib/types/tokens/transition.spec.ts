@@ -44,6 +44,10 @@ describe('isTransitionToken', () => {
     expect(isTransitionToken({ $type: 'transition', $value })).to.equal(true)
   })
 
+  it('returns true for an object with $type transition and a reference $value', () => {
+    expect(isTransitionToken({ $type: 'transition', $value: '{transition.test}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isTransitionToken({ $value })).to.equal(false)
   })

@@ -47,6 +47,10 @@ describe('isGradientToken', () => {
     expect(isGradientToken({ $type: 'gradient', $value })).to.equal(true)
   })
 
+  it('returns true for an object with $type gradient and a reference $value', () => {
+    expect(isGradientToken({ $type: 'gradient', $value: '{gradient.monochrome}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isGradientToken({ $value })).to.equal(false)
   })

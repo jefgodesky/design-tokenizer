@@ -1,9 +1,7 @@
 import rfdc from 'rfdc'
-import Dictionary from '../types/dictionary.js'
-
 const clone = rfdc()
 
-const resolveReferences = (values: Dictionary): Dictionary => {
+const resolveReferences = (values: { [key: string]: any }): { [key: string]: any } => {
   const cpy = clone(values)
   const regex = /{(.*?)}/
   for (const key in cpy) {

@@ -20,6 +20,6 @@ describe('getValues', () => {
       }
     }
     const actual = getValues(set)
-    expect(JSON.stringify(actual)).to.equal('{"color.green":"#008800","font.family.basic":["Helvetica","sans-serif"]}')
+    expect(JSON.stringify(actual)).to.equal('{"color.green":{"$type":"color","$value":"#008800"},"font.family.basic":{"$type":"fontFamily","$value":["Helvetica","sans-serif"]}}')
   })
 })

@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/jefgodesky/w3c-design-tokenizer#readme",
   "dependencies": {
+    "commander": "^11.0.0",
     "rfdc": "^1.3.0"
   },
   "devDependencies": {

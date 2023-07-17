@@ -42,6 +42,18 @@ describe('isTransition', () => {
     expect(isTransition({ duration: '200ms', delay: '0ms', timingFunction: [0.5, 0, 1, 1] })).to.equal(true)
   })
 
+  it('returns true for an object with a duration reference', () => {
+    expect(isTransition({ duration: '{duration.quick}', delay: '0ms', timingFunction: [0.5, 0, 1, 1] })).to.equal(true)
+  })
+
+  it('returns true for an object with a delay reference', () => {
+    expect(isTransition({ duration: '200ms', delay: '{duration.instantaneous}', timingFunction: [0.5, 0, 1, 1] })).to.equal(true)
+  })
+
+  it('returns true for an object with a timing function reference', () => {
+    expect(isTransition({ duration: '200ms', delay: '0ms', timingFunction: '{timing.transition}' })).to.equal(true)
+  })
+
   it('returns false if object has no duration', () => {
     expect(isTransition({ delay: '0ms', timingFunction: [0.5, 0, 1, 1] })).to.equal(false)
   })

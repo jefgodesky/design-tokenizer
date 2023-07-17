@@ -13,7 +13,7 @@ const isTransition = (obj: any): obj is Transition => {
   if (!isDictionary(obj)) return false
   const { duration, delay, timingFunction } = obj
   if (duration === undefined || !(isDuration(duration) || isReference(duration))) return false
-  if (delay === undefined || !(isDuration(delay) || isDuration(delay))) return false
+  if (delay === undefined || !(isDuration(delay) || isReference(delay))) return false
   if (timingFunction === undefined || !(isCubicBezier(timingFunction) || isReference(timingFunction))) return false
   return true
 }

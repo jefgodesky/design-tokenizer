@@ -42,6 +42,10 @@ describe('isCubicBezierToken', () => {
     expect(isCubicBezierToken({ $type: 'cubicBezier', $value: [0, 0, 0, 0] })).to.equal(true)
   })
 
+  it('returns true for an object with $type cubicBezier and a reference $value', () => {
+    expect(isCubicBezierToken({ $type: 'cubicBezier', $value: '{curves.flat}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isCubicBezierToken({ $value: [0, 0, 0, 0] })).to.equal(false)
   })

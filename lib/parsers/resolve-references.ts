@@ -1,13 +1,16 @@
 import rfdc from 'rfdc'
+import { isReference } from '../types/basic/reference.js'
+import TokenValueDictionary from '../types/token-value-dictionary.js'
 const clone = rfdc()
 
-const resolveReferences = (values: { [key: string]: any }): { [key: string]: any } => {
-  const cpy = clone(values)
-  const regex = /{(.*?)}/
+const resolveReferences = (ref: { [key: string]: any }, working?: { [key: string]: any }): TokenValueDictionary => {
+  const cpy = working ?? clone(ref)
   for (const key in cpy) {
-    const match = typeof cpy[key] === 'string' ? (cpy[key] as string).match(regex) : null
-    if (match === null || match.length < 2) continue
-    cpy[key] = cpy[match[1]]
+    cpy[key] = isReference(cpy[key])
+      ? clone(ref[cpy[key].substring(1, cpy[key].length - 1)].$value)
+      : typeof cpy[key] === 'object' && Object.keys(cpy[key]).length > 0
+        ? resolveReferences(ref, cpy[key])
+        : cpy[key]
   }
   return cpy
 }

@@ -1,5 +1,5 @@
 import rfdc from 'rfdc'
-import Dictionary from './types/dictionary.js'
+import Dictionary from '../types/dictionary.js'
 
 const clone = rfdc()
 

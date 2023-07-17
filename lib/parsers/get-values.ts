@@ -1,4 +1,4 @@
-import Dictionary from './types/dictionary.js'
+import Dictionary from '../types/dictionary.js'
 
 const getValues = (dict: any, path: string[] = []): Dictionary => {
   let values: Dictionary = {}

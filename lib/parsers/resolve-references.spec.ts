@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import Dictionary from './types/dictionary.js'
+import Dictionary from '../types/dictionary.js'
 import resolveReferences from './resolve-references.js'
 
 describe('resolveReferences', () => {

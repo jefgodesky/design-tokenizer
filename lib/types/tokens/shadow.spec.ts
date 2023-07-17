@@ -44,6 +44,10 @@ describe('isShadowToken', () => {
     expect(isShadowToken({ $type: 'shadow', $value })).to.equal(true)
   })
 
+  it('returns true for an object with $type shadow and a reference $value', () => {
+    expect(isShadowToken({ $type: 'shadow', $value: '{shadow.drop}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isShadowToken({ $value })).to.equal(false)
   })

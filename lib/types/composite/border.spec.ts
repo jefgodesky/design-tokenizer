@@ -39,7 +39,19 @@ describe('isBorder', () => {
   })
 
   it('returns true for an object with color, width, and style', () => {
-    expect(isBorder({ color: '#ff0000', width: '1px', style: 'solid' })).to.equal(true)
+    expect(isBorder({ color: '#008800', width: '1px', style: 'solid' })).to.equal(true)
+  })
+
+  it('returns true for an object with a reference for color', () => {
+    expect(isBorder({ color: '{color.green}', width: '1px', style: 'solid' })).to.equal(true)
+  })
+
+  it('returns true for an object with a reference for width', () => {
+    expect(isBorder({ color: '#008800', width: '{width.border}', style: 'solid' })).to.equal(true)
+  })
+
+  it('returns true for an object with a reference for style', () => {
+    expect(isBorder({ color: '#008800', width: '1px', style: '{strokeStyle.border}' })).to.equal(true)
   })
 
   it('returns false if object has no color', () => {

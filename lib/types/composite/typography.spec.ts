@@ -39,7 +39,27 @@ describe('isTypography', () => {
   })
 
   it('returns true for an object with fontFamily, fontSize, fontWeight, letterSpacing, and lineHeight properties', () => {
-    expect(isTypography({ fontFamily: 'Roboto', fontSize: '42px', fontWeight: 700, letterSpacing: '0.1px', lineHeight: 1.2 })).to.equal(true)
+    expect(isTypography({ fontFamily: 'Helvetica', fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with a font family reference', () => {
+    expect(isTypography({ fontFamily: '{font.family.sans}', fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with a font size reference', () => {
+    expect(isTypography({ fontFamily: 'Helvetica', fontSize: '{font.size.base}', fontWeight: 'normal', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with a font weight reference', () => {
+    expect(isTypography({ fontFamily: 'Helvetica', fontSize: '1rem', fontWeight: '{font.weight.base}', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with a letter spacing reference', () => {
+    expect(isTypography({ fontFamily: 'Helvetica', fontSize: '1rem', fontWeight: 'normal', letterSpacing: '{font.spacing.letter.base}', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with a line height reference', () => {
+    expect(isTypography({ fontFamily: 'Helvetica', fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0px', lineHeight: '{font.spacing.line.base}' })).to.equal(true)
   })
 
   it('returns false for an object with no fontFamily', () => {

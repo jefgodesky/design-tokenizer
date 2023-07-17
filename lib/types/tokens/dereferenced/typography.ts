@@ -1,14 +1,13 @@
-import Typography from '../../composite/typography.js'
+import DerefTypography, { isDerefTypography } from '../../composite/dereferenced/typography.js'
 import TypographyToken, { isTypographyToken } from '../typography.js'
-import { isReference } from '../../basic/reference.js'
 
 interface DerefTypographyToken extends Omit<TypographyToken, '$value'> {
-  $value: Typography
+  $value: DerefTypography
 }
 
 const isDerefTypographyToken = (obj: any): obj is DerefTypographyToken => {
   if (!isTypographyToken(obj)) return false
-  return !isReference(obj.$value)
+  return isDerefTypography(obj.$value)
 }
 
 export default DerefTypographyToken

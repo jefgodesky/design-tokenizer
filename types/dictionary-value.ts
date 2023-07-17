@@ -1,6 +1,6 @@
 import Dictionary, { isDictionary } from './dictionary.js'
 
-type DictionaryValue = Dictionary | string | number | boolean | Dictionary[] | string[] | number[] | boolean[]
+type DictionaryValue = Dictionary | string | number | boolean | DictionaryValue[]
 
 const isDictionaryValue = (obj: any): boolean => {
   const types = ['boolean', 'number', 'string']

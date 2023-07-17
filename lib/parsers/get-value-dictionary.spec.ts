@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import getValues from './get-values.js'
+import getValueDictionary from './get-value-dictionary.js'
 
 describe('getValues', () => {
   it('creates a flattened dictionary of values', () => {
@@ -19,7 +19,7 @@ describe('getValues', () => {
         }
       }
     }
-    const actual = getValues(set)
+    const actual = getValueDictionary(set)
     expect(JSON.stringify(actual)).to.equal('{"color.green":{"$type":"color","$value":"#008800"},"font.family.basic":{"$type":"fontFamily","$value":["Helvetica","sans-serif"]}}')
   })
 })

@@ -1,15 +1,8 @@
 import DictionaryKey, { isDictionaryKey } from './dictionary-key.js'
+import DictionaryValue, { isDictionaryValue } from './dictionary-value.js'
 
 interface Dictionary {
-  [key: DictionaryKey]: Dictionary | string | number | boolean | Dictionary[] | string[] | number[] | boolean[]
-}
-
-const isDictionaryValue = (obj: any): boolean => {
-  const accepted = ['string', 'number', 'boolean']
-  if (accepted.includes(typeof obj)) return true
-  if (isDictionary(obj)) return true
-  if (Array.isArray(obj)) return obj.reduce((acc: boolean, curr) => acc && isDictionaryValue(curr), true)
-  return false
+  [key: DictionaryKey]: DictionaryValue
 }
 
 const isDictionary = (obj: any): obj is Dictionary => {
@@ -19,4 +12,4 @@ const isDictionary = (obj: any): obj is Dictionary => {
 }
 
 export default Dictionary
-export { isDictionary, isDictionaryValue }
+export { isDictionary }

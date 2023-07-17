@@ -1,76 +1,10 @@
 import { expect } from 'chai'
-import { isDictionary, isDictionaryValue } from './dictionary.js'
+import { isDictionary } from './dictionary.js'
 
 describe('Dictionary', () => {
   const dict = { a: 1 }
   const str = 'a'
   const num = 1
-
-  describe('isDictionaryValue', () => {
-    it('returns false when given undefined', () => {
-      expect(isDictionaryValue(undefined)).to.equal(false)
-    })
-
-    it('returns false when given null', () => {
-      expect(isDictionaryValue(null)).to.equal(false)
-    })
-
-    it('returns false when given a function', () => {
-      expect(isDictionaryValue(() => {})).to.equal(false)
-    })
-
-    it('returns true when given a number', () => {
-      expect(isDictionaryValue(num)).to.equal(true)
-    })
-
-    it('returns true when given a string', () => {
-      expect(isDictionaryValue(str)).to.equal(true)
-    })
-
-    it('returns true when given an empty array', () => {
-      expect(isDictionaryValue([])).to.equal(true)
-    })
-
-    it('returns false when given an array that includes undefined', () => {
-      expect(isDictionaryValue([undefined])).to.equal(false)
-    })
-
-    it('returns false when given an array that includes null', () => {
-      expect(isDictionaryValue([null])).to.equal(false)
-    })
-
-    it('returns false when given an array that includes functions', () => {
-      expect(isDictionaryValue([() => {}])).to.equal(false)
-    })
-
-    it('returns false when given an array of booleans', () => {
-      expect(isDictionaryValue([true, false])).to.equal(true)
-    })
-
-    it('returns true when given an array of numbers', () => {
-      expect(isDictionaryValue([1, 2, 3])).to.equal(true)
-    })
-
-    it('returns true when given an array of strings', () => {
-      expect(isDictionaryValue(str.split(''))).to.equal(true)
-    })
-
-    it('returns true when given a mixed array of numbers, strings, and booleans', () => {
-      expect(isDictionaryValue([1, 2, 3, str, true, false])).to.equal(true)
-    })
-
-    it('returns true when given an empty object', () => {
-      expect(isDictionaryValue({})).to.equal(true)
-    })
-
-    it('returns false when an object that is not a dictionary', () => {
-      expect(isDictionaryValue({ prop: undefined })).to.equal(false)
-    })
-
-    it('returns true when given a dictionary', () => {
-      expect(isDictionaryValue(dict)).to.equal(true)
-    })
-  })
 
   describe('isDictionary', () => {
     it('returns false when given undefined', () => {

@@ -42,6 +42,10 @@ describe('isColorToken', () => {
     expect(isColorToken({ $type: 'color', $value: '#ff0000' })).to.equal(true)
   })
 
+  it('returns true for an object with $type color and a reference $value', () => {
+    expect(isColorToken({ $type: 'color', $value: '{color.red}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isColorToken({ $value: '#ff0000' })).to.equal(false)
   })

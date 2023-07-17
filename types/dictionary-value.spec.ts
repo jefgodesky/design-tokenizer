@@ -74,6 +74,10 @@ describe('isDictionaryValue', () => {
     expect(isDictionaryValue({ $a: 1 })).to.equal(false)
   })
 
+  it('returns false if a dictionary includes nested reserved keys', () => {
+    expect(isDictionaryValue({ a: { $b: 1 } })).to.equal(false)
+  })
+
   it('returns true for a nested color token', () => {
     expect(isDictionaryValue({ color: { green: { $type: 'color', $value: '#008800' } } })).to.equal(true)
   })

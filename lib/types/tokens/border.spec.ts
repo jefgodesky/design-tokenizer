@@ -44,6 +44,10 @@ describe('isBorderToken', () => {
     expect(isBorderToken({ $type: 'border', $value })).to.equal(true)
   })
 
+  it('returns true for an object with $type border and a reference $value', () => {
+    expect(isBorderToken({ $type: 'border', $value: '{border.basic}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isBorderToken({ $value })).to.equal(false)
   })

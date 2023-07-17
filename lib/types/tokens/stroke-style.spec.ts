@@ -38,8 +38,16 @@ describe('isStrokeStyleToken', () => {
     expect(isStrokeStyleToken({})).to.equal(false)
   })
 
-  it('returns true for an object with $type strokeStyle and a valid $value', () => {
+  it('returns true for an object with $type strokeStyle and a valid string $value', () => {
     expect(isStrokeStyleToken({ $type: 'strokeStyle', $value: 'solid' })).to.equal(true)
+  })
+
+  it('returns true for an object with $type strokeStyle and a valid object $value', () => {
+    expect(isStrokeStyleToken({ $type: 'strokeStyle', $value: { dashArray: ['0.5rem', '0.25rem'], lineCap: 'round' } })).to.equal(true)
+  })
+
+  it('returns true for an object with $type strokeStyle and a reference $value', () => {
+    expect(isStrokeStyleToken({ $type: 'strokeStyle', $value: '{strokes.basic}' })).to.equal(true)
   })
 
   it('returns false for an object with no $type', () => {

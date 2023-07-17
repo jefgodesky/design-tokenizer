@@ -42,6 +42,26 @@ describe('isShadow', () => {
     expect(isShadow({ color: '#00000080', offsetX: '0.5rem', offsetY: '0.5rem', blur: '1.5rem', spread: '0rem' })).to.equal(true)
   })
 
+  it('returns true for an object with a color reference', () => {
+    expect(isShadow({ color: '{color.shadow}', offsetX: '0.5rem', offsetY: '0.5rem', blur: '1.5rem', spread: '0rem' })).to.equal(true)
+  })
+
+  it('returns true for an object with an offset X reference', () => {
+    expect(isShadow({ color: '#00000080', offsetX: '{spacing.shadow.x}', offsetY: '0.5rem', blur: '1.5rem', spread: '0rem' })).to.equal(true)
+  })
+
+  it('returns true for an object with an offset Y reference', () => {
+    expect(isShadow({ color: '#00000080', offsetX: '0.5rem', offsetY: '{spacing.shadow.y}', blur: '1.5rem', spread: '0rem' })).to.equal(true)
+  })
+
+  it('returns true for an object with a blur reference', () => {
+    expect(isShadow({ color: '#00000080', offsetX: '0.5rem', offsetY: '0.5rem', blur: '{spacing.shadow.blur}', spread: '0rem' })).to.equal(true)
+  })
+
+  it('returns true for an object with a spread reference', () => {
+    expect(isShadow({ color: '#00000080', offsetX: '0.5rem', offsetY: '0.5rem', blur: '1.5rem', spread: '{spacing.shadow.spread}' })).to.equal(true)
+  })
+
   it('returns false for an object with no color', () => {
     expect(isShadow({ offsetX: '0.5rem', offsetY: '0.5rem', blur: '1.5rem', spread: '0rem' })).to.equal(false)
   })

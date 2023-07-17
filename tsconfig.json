@@ -8,6 +8,9 @@
     "moduleResolution": "node",
     "strict": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true,
+    "rootDir": "./lib",
+    "outDir": "./dist"
   }
 }

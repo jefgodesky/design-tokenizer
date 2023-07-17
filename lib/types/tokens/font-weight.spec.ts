@@ -42,6 +42,10 @@ describe('isFontWeightToken', () => {
     expect(isFontWeightToken({ $type: 'fontWeight', $value: 'normal' })).to.equal(true)
   })
 
+  it('returns true for an object with $type fontWeight and a reference $value', () => {
+    expect(isFontWeightToken({ $type: 'fontWeight', $value: '{font.weight.baseline}}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isFontWeightToken({ $value: 'normal' })).to.equal(false)
   })

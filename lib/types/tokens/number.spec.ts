@@ -42,6 +42,10 @@ describe('isNumberToken', () => {
     expect(isNumberToken({ $type: 'number', $value: 0 })).to.equal(true)
   })
 
+  it('returns true for an object with $type number and a reference $value', () => {
+    expect(isNumberToken({ $type: 'number', $value: '{number.magic.nil}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isNumberToken({ $value: 0 })).to.equal(false)
   })

@@ -42,6 +42,10 @@ describe('isDimensionToken', () => {
     expect(isDimensionToken({ $type: 'dimension', $value: '1rem' })).to.equal(true)
   })
 
+  it('returns true for an object with $type dimension and a reference $value', () => {
+    expect(isDimensionToken({ $type: 'dimension', $value: '{spacing.horizontal}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isDimensionToken({ $value: '1rem' })).to.equal(false)
   })

@@ -39,7 +39,15 @@ describe('isGradientStop', () => {
   })
 
   it('returns true for an object with color and position', () => {
-    expect(isGradientStop({ color: '#ff0000', position: 0 })).to.equal(true)
+    expect(isGradientStop({ color: '#008800', position: 0 })).to.equal(true)
+  })
+
+  it('returns true for an object with a color reference', () => {
+    expect(isGradientStop({ color: '{color.green}', position: 0 })).to.equal(true)
+  })
+
+  it('returns true for an object with a position reference', () => {
+    expect(isGradientStop({ color: '#008800', position: '{numbers.magic.nil}' })).to.equal(true)
   })
 
   it('returns false for an object with no color', () => {

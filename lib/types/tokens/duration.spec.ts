@@ -42,6 +42,10 @@ describe('isDurationToken', () => {
     expect(isDurationToken({ $type: 'duration', $value: '200ms' })).to.equal(true)
   })
 
+  it('returns true for an object with $type duration and a reference $value', () => {
+    expect(isDurationToken({ $type: 'duration', $value: '{duration.quick}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isDurationToken({ $value: '200ms' })).to.equal(false)
   })

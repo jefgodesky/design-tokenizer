@@ -50,6 +50,10 @@ describe('isTypographyToken', () => {
     expect(isTypographyToken({ $type: 'typography', $value })).to.equal(true)
   })
 
+  it('returns true for an object with $type typography and a reference $value', () => {
+    expect(isTypographyToken({ $type: 'typography', $value: '{typography.heading}' })).to.equal(true)
+  })
+
   it('returns false for an object with no $type', () => {
     expect(isTypographyToken({ $value })).to.equal(false)
   })

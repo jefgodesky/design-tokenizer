@@ -73,27 +73,31 @@ describe('isStrokeStyleObject', () => {
   })
 
   it('returns false when given null for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: null })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: null })).to.equal(false)
   })
 
   it('returns false when given true for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: true })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: true })).to.equal(false)
   })
 
   it('returns false when given false for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: false })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: false })).to.equal(false)
   })
 
   it('returns false when given a function for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: () => {} })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: () => {} })).to.equal(false)
   })
 
   it('returns false when given a number for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: 1 })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: 1 })).to.equal(false)
   })
 
   it('returns true when given an array of strings for dashArray and "round" for lineCap', () => {
     expect(isStrokeStyleObject({ dashArray, lineCap: 'round' })).to.equal(true)
+  })
+
+  it('returns true when given an array of references for dashArray and "round" for lineCap', () => {
+    expect(isStrokeStyleObject({ dashArray: ['{dash.short}', '{dash.long}'], lineCap: 'round' })).to.equal(true)
   })
 
   it('returns true when given an array of strings for dashArray and "butt" for lineCap', () => {
@@ -105,7 +109,7 @@ describe('isStrokeStyleObject', () => {
   })
 
   it('returns false when given any other string for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: 'test' })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: 'test' })).to.equal(false)
   })
 
   it('returns false when given invalid strings for dashArray', () => {
@@ -113,10 +117,10 @@ describe('isStrokeStyleObject', () => {
   })
 
   it('returns false when given an array for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: [] })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: [] })).to.equal(false)
   })
 
   it('returns false when given an object for lineCap', () => {
-    expect(isStrokeStyleObject({ dashArray, lineChap: { lineCap: 'round' } })).to.equal(false)
+    expect(isStrokeStyleObject({ dashArray, lineCap: { lineCap: 'round' } })).to.equal(false)
   })
 })

@@ -1,10 +1,9 @@
-import Dictionary, { isDictionary } from '../dictionary.js'
 import Dimension, { isDimension } from '../basic/dimension.js'
 import FontFamily, { isFontFamily } from '../basic/font-family.js'
 import FontWeight, { isFontWeight } from '../basic/font-weight.js'
 import Reference, { isReference } from '../basic/reference.js'
 
-interface Typography extends Dictionary {
+interface Typography {
   fontFamily: FontFamily | Reference
   fontSize: Dimension | Reference
   fontWeight: FontWeight | Reference
@@ -13,7 +12,7 @@ interface Typography extends Dictionary {
 }
 
 const isTypography = (obj: any): obj is Typography => {
-  if (!isDictionary(obj)) return false
+  if (obj === null || typeof obj !== 'object') return false
   const { fontFamily, fontSize, fontWeight, letterSpacing, lineHeight } = obj
   if (fontFamily === undefined || !(isFontFamily(fontFamily) || isReference(fontFamily))) return false
   if (fontSize === undefined || !(isDimension(fontSize) || isReference(fontSize))) return false

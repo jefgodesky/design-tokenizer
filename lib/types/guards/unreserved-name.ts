@@ -3,4 +3,4 @@ const isUnreservedName = (candidate: any): boolean => {
   return '{.}'.split('').reduce((acc: boolean, curr: string) => acc && !candidate.includes(curr), true)
 }
 
-export { isUnreservedName }
+export default isUnreservedName

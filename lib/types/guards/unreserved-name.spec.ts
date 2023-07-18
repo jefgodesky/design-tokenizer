@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { isUnreservedName } from './unreserved-name.js'
+import isUnreservedName from './unreserved-name.js'
 
 describe('isUnreservedName', () => {
   it('rejects undefined', () => {

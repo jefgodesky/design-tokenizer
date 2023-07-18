@@ -1,17 +1,12 @@
-import Dictionary, { isDictionary } from '../dictionary.js'
+import GenericToken, { isGenericToken } from '../generic-token.js'
 import Reference, { isReference } from '../basic/reference.js'
 import Transition, { isTransition } from '../composite/transition.js'
 
-interface TransitionToken extends Dictionary {
-  $type: 'transition'
-  $value: Transition | Reference
-}
+interface TransitionToken extends GenericToken<'transition', Transition | Reference> {}
 
 const isTransitionToken = (obj: any): obj is TransitionToken => {
-  if (obj === undefined || obj === null) return false
-  const { $type, $value, ...dict } = obj
-  if (!isDictionary(dict)) return false
-  return $type === 'transition' && (isTransition($value) || isReference($value))
+  if (!isGenericToken(obj)) return false
+  return obj.$type === 'transition' && (isTransition(obj.$value) || isReference(obj.$value))
 }
 
 export default TransitionToken

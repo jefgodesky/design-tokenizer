@@ -27,7 +27,7 @@ describe('isColorToken', () => {
   })
 
   it('returns false for strings', () => {
-    expect(isColorToken('#ff0000')).to.equal(false)
+    expect(isColorToken('#008800')).to.equal(false)
   })
 
   it('returns false for an empty array', () => {
@@ -39,19 +39,19 @@ describe('isColorToken', () => {
   })
 
   it('returns true for an object with $type color and a valid $value', () => {
-    expect(isColorToken({ $type: 'color', $value: '#ff0000' })).to.equal(true)
+    expect(isColorToken({ $type: 'color', $value: '#008800' })).to.equal(true)
   })
 
   it('returns true for an object with $type color and a reference $value', () => {
-    expect(isColorToken({ $type: 'color', $value: '{color.red}' })).to.equal(true)
+    expect(isColorToken({ $type: 'color', $value: '{color.green}' })).to.equal(true)
   })
 
   it('returns false for an object with no $type', () => {
-    expect(isColorToken({ $value: '#ff0000' })).to.equal(false)
+    expect(isColorToken({ $value: '#008800' })).to.equal(false)
   })
 
   it('returns false for an object with $type other than color', () => {
-    expect(isColorToken({ $type: 'colour', $value: '#ff0000' })).to.equal(false)
+    expect(isColorToken({ $type: 'colour', $value: '#008800' })).to.equal(false)
   })
 
   it('returns false for an object with no $value', () => {
@@ -59,6 +59,6 @@ describe('isColorToken', () => {
   })
 
   it('returns false for an object with invalid $value', () => {
-    expect(isColorToken({ $type: 'color', $value: 'red' })).to.equal(false)
+    expect(isColorToken({ $type: 'color', $value: 'green' })).to.equal(false)
   })
 })

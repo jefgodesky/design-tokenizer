@@ -1,22 +1,16 @@
-import Dictionary, { isDictionary } from '../dictionary.js'
+import GenericToken, { isGenericToken } from '../generic-token.js'
 import GradientStop, { isGradientStop } from '../composite/gradient-stop.js'
 import Reference, { isReference } from '../basic/reference.js'
 
-interface GradientToken extends Dictionary {
-  $type: 'gradient'
-  $value: GradientStop[] | Reference
-}
+interface GradientToken extends GenericToken<'gradient', GradientStop[] | Reference> {}
 
 const isGradientToken = (obj: any): obj is GradientToken => {
-  if (obj === undefined || obj === null) return false
-  const { $type, $value, ...dict } = obj
-  if (!isDictionary(dict)) return false
-
-  const checks: boolean[] = Array.isArray($value)
-    ? $value.map(stop => isGradientStop(stop))
+  if (!isGenericToken(obj)) return false
+  const checks: boolean[] = Array.isArray(obj.$value)
+    ? obj.$value.map((stop: any) => isGradientStop(stop))
     : [false]
   const isGradient = checks.reduce((acc, curr) => acc && curr, true)
-  return $type === 'gradient' && (isGradient || isReference($value))
+  return obj.$type === 'gradient' && (isGradient || isReference(obj.$value))
 }
 
 export default GradientToken

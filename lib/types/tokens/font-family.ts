@@ -1,17 +1,12 @@
-import Dictionary, { isDictionary } from '../dictionary.js'
 import FontFamily, { isFontFamily } from '../basic/font-family.js'
+import GenericToken, { isGenericToken } from '../generic-token.js'
 import Reference, { isReference } from '../basic/reference.js'
 
-interface FontFamilyToken extends Dictionary {
-  $type: 'fontFamily'
-  $value: FontFamily | Reference
-}
+interface FontFamilyToken extends GenericToken<'fontFamily', FontFamily | Reference> {}
 
 const isFontFamilyToken = (obj: any): obj is FontFamilyToken => {
-  if (obj === undefined || obj === null) return false
-  const { $type, $value, ...dict } = obj
-  if (!isDictionary(dict)) return false
-  return $type === 'fontFamily' && (isFontFamily($value) || isReference($value))
+  if (!isGenericToken(obj)) return false
+  return obj.$type === 'fontFamily' && (isFontFamily(obj.$value) || isReference(obj.$value))
 }
 
 export default FontFamilyToken

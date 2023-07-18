@@ -1,17 +1,15 @@
-import Dictionary, { isDictionary } from '../dictionary.js'
 import FontWeight, { isFontWeight } from '../basic/font-weight.js'
+import GenericToken, { isGenericToken } from '../generic-token.js'
 import Reference, { isReference } from '../basic/reference.js'
 
-interface FontWeightToken extends Dictionary {
+interface FontWeightToken extends GenericToken<'fontWeight', FontWeight | Reference> {
   $type: 'fontWeight'
   $value: FontWeight | Reference
 }
 
 const isFontWeightToken = (obj: any): obj is FontWeightToken => {
-  if (obj === undefined || obj === null) return false
-  const { $type, $value, ...dict } = obj
-  if (!isDictionary(dict)) return false
-  return $type === 'fontWeight' && (isFontWeight($value) || isReference($value))
+  if (!isGenericToken(obj)) return false
+  return obj.$type === 'fontWeight' && (isFontWeight(obj.$value) || isReference(obj.$value))
 }
 
 export default FontWeightToken

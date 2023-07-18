@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { isBorderToken } from './border.js'
 
 describe('isBorderToken', () => {
-  const $value = { color: '#ff0000', width: '1px', style: 'solid' }
+  const $value = { color: '#008800', width: '1px', style: 'solid' }
 
   it('returns false for undefined', () => {
     expect(isBorderToken(undefined)).to.equal(false)
@@ -61,6 +61,6 @@ describe('isBorderToken', () => {
   })
 
   it('returns false for an object with invalid $value', () => {
-    expect(isBorderToken({ $type: 'border', $value: '1px solid #ff0000' })).to.equal(false)
+    expect(isBorderToken({ $type: 'border', $value: '1px solid #008800' })).to.equal(false)
   })
 })

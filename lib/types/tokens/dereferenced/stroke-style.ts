@@ -1,15 +1,14 @@
-import StrokeStyleString from '../../basic/stroke-style.js'
-import StrokeStyleObject from '../../composite/stroke-style.js'
+import StrokeStyleString, { isStrokeStyleString } from '../../basic/stroke-style.js'
+import DerefStrokeStyleObject, { isDerefStrokeStyleObject } from '../../composite/dereferenced/stroke-style.js'
 import StrokeStyleToken, { isStrokeStyleToken } from '../stroke-style.js'
-import { isReference } from '../../basic/reference.js'
 
 interface DerefStrokeStyleToken extends Omit<StrokeStyleToken, '$value'> {
-  $value: StrokeStyleString | StrokeStyleObject
+  $value: StrokeStyleString | DerefStrokeStyleObject
 }
 
 const isDerefStrokeStyleToken = (obj: any): obj is DerefStrokeStyleToken => {
   if (!isStrokeStyleToken(obj)) return false
-  return !isReference(obj.$value)
+  return isStrokeStyleString(obj.$value) || isDerefStrokeStyleObject(obj.$value)
 }
 
 export default DerefStrokeStyleToken

@@ -1,3 +1,6 @@
+import { readFileSync } from 'fs'
+import { program } from 'commander'
+
 import ColorHex from './types/basic/color-hex.js'
 import CubicBezier from './types/basic/cubic-bezier.js'
 import Dimension from './types/basic/dimension.js'
@@ -52,13 +55,35 @@ import DerefTypographyToken from './types/tokens/dereferenced/typography.js'
 import DerefToken from './types/deref.js'
 import DerefTokenList from './types/deref-token-list.js'
 import GenericToken from './types/generic-token.js'
-import Group from './types/group.js'
+import Group, { isGroup } from './types/group.js'
 import Token from './types/token.js'
+
+import getTokenList from './parsers/get-token-list.js'
+import resolveReferences from './parsers/resolve-references.js'
 
 import pkg from '../package.json' assert { type: 'json' }
 
-console.log('W3C Design Tokenizer')
-console.log(`v${pkg.version}`)
+/**
+ * Commander Configuration
+ * Get options from the user.
+ */
+
+program.name(pkg.name)
+  .description(pkg.description)
+  .version(pkg.version)
+  .option('-f, --file <file>', 'JSON file containing design tokens, formatted per the W3C Design Tokens Format Module')
+
+try {
+  program.parse()
+  const options = program.opts()
+  const contents = readFileSync(options.file, { encoding: 'utf8' })
+  const data = JSON.parse(contents)
+  if (!isGroup(data)) throw new TypeError(`The JSON found in ${options.file as string} does not conform to the W3C Design Tokens Format Module.`)
+  const dictionary = resolveReferences(getTokenList(data))
+  console.log(dictionary)
+} catch (err) {
+  console.error(err)
+}
 
 export {
   ColorHex,

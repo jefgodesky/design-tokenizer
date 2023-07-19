@@ -55,7 +55,10 @@ import GenericToken from './types/generic-token.js'
 import Group from './types/group.js'
 import Token from './types/token.js'
 
-console.log('Hello, world!')
+import pkg from '../package.json' assert { type: 'json' }
+
+console.log('W3C Design Tokenizer')
+console.log(`v${pkg.version}`)
 
 export {
   ColorHex,

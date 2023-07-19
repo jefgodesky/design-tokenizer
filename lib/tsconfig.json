@@ -8,12 +8,12 @@
     "moduleResolution": "node",
     "strict": true,
     "skipLibCheck": true,
-    "composite": true,
     "resolveJsonModule": true,
+    "declaration": true,
     "rootDir": ".",
-    "outDir": "."
+    "outDir": "../dist"
   },
-  "files": [
-    "package.json"
+  "references": [
+    { "path":  "../" }
   ]
 }

@@ -6,10 +6,10 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node --no-warnings dist/index.js",
     "test": "mocha",
-    "build": "tsc",
-    "lint": "ts-standard",
+    "build": "tsc --build lib",
+    "lint": "ts-standard --project lib/tsconfig.json",
     "lint:fix": "ts-standard --fix",
     "check": "npm-run-all lint test",
     "prepack": "npm-run-all lint test build"

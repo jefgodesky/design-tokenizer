@@ -32,7 +32,7 @@ const renderer: { [key: string]: Function } = {
   typography: renderTypographyToken
 }
 
-const renderSCSS = (list: DerefTokenList, options: { prefix?: string, add?: string, remove?: string } = {}): string => {
+const generateVariables = (list: DerefTokenList, options: { prefix?: string, add?: string, remove?: string } = {}): string => {
   const prefix = options.prefix ?? ''
   return Object.keys(list)
     .filter(key => key.startsWith(prefix))
@@ -40,4 +40,4 @@ const renderSCSS = (list: DerefTokenList, options: { prefix?: string, add?: stri
     .join('\n')
 }
 
-export default renderSCSS
+export default generateVariables

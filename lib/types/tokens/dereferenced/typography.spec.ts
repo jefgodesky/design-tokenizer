@@ -50,6 +50,10 @@ describe('isDerefTypographyToken', () => {
     expect(isDerefTypographyToken({ $type: 'typography', $value })).to.equal(true)
   })
 
+  it('returns true for an object with a valid font style', () => {
+    expect(isDerefTypographyToken({ $type: 'typography', $value: { ...$value, fontStyle: 'italic' } })).to.equal(true)
+  })
+
   it('returns false for an object with $type typography and a reference $value', () => {
     expect(isDerefTypographyToken({ $type: 'typography', $value: '{typography.heading}' })).to.equal(false)
   })

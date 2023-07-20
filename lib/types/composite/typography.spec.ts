@@ -101,4 +101,24 @@ describe('isTypography', () => {
   it('returns false for an object with invalid lineHeight', () => {
     expect(isTypography({ fontFamily: 'Roboto', fontSize: '42px', fontWeight: 700, letterSpacing: '0.1px', lineHeight: '1.2' })).to.equal(false)
   })
+
+  it('returns true for an object with a normal font style', () => {
+    expect(isTypography({ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 'normal', fontStyle: 'normal', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with an italic font style', () => {
+    expect(isTypography({ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 'normal', fontStyle: 'italic', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with an oblique font style', () => {
+    expect(isTypography({ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 'normal', fontStyle: 'oblique', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns true for an object with an oblique font style with an angle', () => {
+    expect(isTypography({ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 'normal', fontStyle: 'oblique 10deg', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(true)
+  })
+
+  it('returns false for an object with an invalid font style', () => {
+    expect(isTypography({ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 'normal', fontStyle: 'jazzy 10deg', letterSpacing: '0px', lineHeight: 1.2 })).to.equal(false)
+  })
 })

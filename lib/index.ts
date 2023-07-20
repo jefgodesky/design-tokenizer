@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs'
 import { program } from 'commander'
+import yaml from 'yaml'
 
 import ColorHex from './types/basic/color-hex.js'
 import CubicBezier from './types/basic/cubic-bezier.js'
@@ -71,16 +72,33 @@ import pkg from '../package.json' assert { type: 'json' }
 program.name(pkg.name)
   .description(pkg.description)
   .version(pkg.version)
-  .option('-f, --file <file>', 'JSON file containing design tokens, formatted per the W3C Design Tokens Format Module')
+  .option('-f, --file <file>', 'JSON file containing design tokens, formatted per the W3C Design Tokens Format Module.')
+  .option('-c, --config <config>', 'YAML configuration specifying what you would like to output.')
 
 try {
   program.parse()
   const options = program.opts()
+
   const contents = readFileSync(options.file, { encoding: 'utf8' })
   const data = JSON.parse(contents)
   if (!isGroup(data)) throw new TypeError(`The JSON found in ${options.file as string} does not conform to the W3C Design Tokens Format Module.`)
   const dictionary = resolveReferences(getTokenList(data))
   console.log(dictionary)
+
+  const configuration = readFileSync(options.config, { encoding: 'utf8' })
+  const config = yaml.parse(configuration)
+
+  const renderers: { [key: string]: { acknowledgment: string } } = {
+    scss: { acknowledgment: 'Rendering tokens to SCSS variables...' }
+  }
+
+  for (const key in config) {
+    if (!Object.keys(renderers).includes(key)) {
+      console.error(`${key}: We do not have any renderers of type "${key}". Options are: ${Object.keys(renderers).join(', ')}. Skipping "${key}."`)
+      continue
+    }
+    console.log(`${key}: ${renderers[key].acknowledgment}`)
+  }
 } catch (err) {
   console.error(err)
 }

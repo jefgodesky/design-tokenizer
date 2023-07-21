@@ -304,4 +304,40 @@ describe('isColorDoc', () => {
   it('rejects objects with an incorrectly formatted hsv', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl, hsv: { hue: 120, saturation: 100, value: 53.3 } })).to.equal(false)
   })
+
+  it('accepts an object with an undefined description', () => {
+    expect(isColorDoc({ description: undefined, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(true)
+  })
+
+  it('rejects an object with a null description', () => {
+    expect(isColorDoc({ description: null, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
+
+  it('rejects an object with a function description', () => {
+    expect(isColorDoc({ description: () => {}, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
+
+  it('rejects an object with a true description', () => {
+    expect(isColorDoc({ description: true, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
+
+  it('rejects an object with a false description', () => {
+    expect(isColorDoc({ description: false, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
+
+  it('rejects an object with a number description', () => {
+    expect(isColorDoc({ description: 1, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
+
+  it('accepts an object with a string description', () => {
+    expect(isColorDoc({ description: 'Green', scss, hex, rgb, cmyk, hsl, hsv })).to.equal(true)
+  })
+
+  it('rejects an object with an array description', () => {
+    expect(isColorDoc({ description: [], scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
+
+  it('rejects an object with an object description', () => {
+    expect(isColorDoc({ description: {}, scss, hex, rgb, cmyk, hsl, hsv })).to.equal(false)
+  })
 })

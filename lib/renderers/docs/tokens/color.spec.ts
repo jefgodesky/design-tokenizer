@@ -9,6 +9,11 @@ describe('getColorDoc', () => {
     expect(getColorDoc('color.primary.green', token).scss).to.equal('color-primary-green')
   })
 
+  it('includes the description, if there is one', () => {
+    const t = { $description: 'Green', ...token }
+    expect(getColorDoc('color.primary.green', t).description).to.equal('Green')
+  })
+
   it('can add or remove prefixes from the SCSS variable name', () => {
     const prefix = { add: 'test.case', remove: 'color.primary' }
     expect(getColorDoc('color.primary.green', token, prefix).scss).to.equal('test-case-green')

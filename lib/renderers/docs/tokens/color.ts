@@ -9,6 +9,7 @@ extend([cmykPlugin])
 const getColorDoc = (name: string, color: DerefColorToken, prefix: { remove?: string, add?: string } = {}): ColorDoc => {
   const { c, m, y, k, a } = colord(color.$value).toCmyk()
   return {
+    description: color.$description,
     scss: getName(name, prefix),
     hex: color.$value,
     rgb: colord(color.$value).toRgb(),

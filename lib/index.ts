@@ -62,6 +62,8 @@ import Token from './types/token.js'
 import getTokenList from './parsers/get-token-list.js'
 import resolveReferences from './parsers/resolve-references.js'
 
+import renderSCSS from './renderers/scss/render.js'
+
 import pkg from '../package.json' assert { type: 'json' }
 
 /**
@@ -83,13 +85,12 @@ try {
   const data = JSON.parse(contents)
   if (!isGroup(data)) throw new TypeError(`The JSON found in ${options.file as string} does not conform to the W3C Design Tokens Format Module.`)
   const dictionary = resolveReferences(getTokenList(data))
-  console.log(dictionary)
 
   const configuration = readFileSync(options.config, { encoding: 'utf8' })
   const config = yaml.parse(configuration)
 
-  const renderers: { [key: string]: { acknowledgment: string } } = {
-    scss: { acknowledgment: 'Rendering tokens to SCSS variables...' }
+  const renderers: { [key: string]: { acknowledgment: string, render: Function } } = {
+    scss: { acknowledgment: 'Rendering tokens to SCSS variables...', render: renderSCSS }
   }
 
   for (const key in config) {
@@ -98,6 +99,7 @@ try {
       continue
     }
     console.log(`${key}: ${renderers[key].acknowledgment}`)
+    renderers[key].render(dictionary, config[key])
   }
 } catch (err) {
   console.error(err)

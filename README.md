@@ -1,2 +1,2 @@
-# w3c-design-tokenizer
+# Design Tokenizer
 A tool for working with W3C Design Token JSON files.

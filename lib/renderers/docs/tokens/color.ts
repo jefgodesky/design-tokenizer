@@ -7,15 +7,19 @@ import getName from '../../scss/get-name.js'
 extend([cmykPlugin])
 
 const getColorDoc = (name: string, color: DerefColorToken, prefix: { remove?: string, add?: string } = {}): ColorDoc => {
-  const { c, m, y, k, a } = colord(color.$value).toCmyk()
+  const rgb = colord(color.$value).toRgb()
+  const cmyk = colord(color.$value).toCmyk()
+  const hsl = colord(color.$value).toHsl()
+  const hsv = colord(color.$value).toHsv()
+
   return {
     description: color.$description,
     scss: getName(name, prefix),
     hex: color.$value,
-    rgb: colord(color.$value).toRgb(),
-    cmyk: { c, m, y, k, a },
-    hsl: colord(color.$value).toHsl(),
-    hsv: colord(color.$value).toHsv()
+    rgb: `${rgb.r}, ${rgb.g}, ${rgb.b}`,
+    cmyk: `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`,
+    hsl: `${hsl.h}º, ${hsl.s}, ${hsl.l}`,
+    hsv: `${hsv.h}º, ${hsv.s}, ${hsv.v}`
   }
 }
 

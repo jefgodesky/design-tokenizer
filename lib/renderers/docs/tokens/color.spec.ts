@@ -25,25 +25,21 @@ describe('getColorDoc', () => {
 
   it('gets the RGB value', () => {
     const doc = getColorDoc('color.primary.green', token)
-    const { r, g, b } = doc.rgb
-    expect(`${r}, ${g}, ${b}`).to.equal('0, 136, 0')
+    expect(doc.rgb).to.equal('0, 136, 0')
   })
 
   it('gets the CMYK value', () => {
     const doc = getColorDoc('color.primary.green', token)
-    const { c, m, y, k } = doc.cmyk
-    expect(`${c}, ${m}, ${y}, ${k}`).to.equal('100, 0, 100, 47')
+    expect(doc.cmyk).to.equal('100, 0, 100, 47')
   })
 
   it('gets the HSL value', () => {
     const doc = getColorDoc('color.primary.green', token)
-    const { h, s, l } = doc.hsl
-    expect(`${h}, ${s}, ${l}`).to.equal('120, 100, 27')
+    expect(doc.hsl).to.equal('120º, 100, 27')
   })
 
   it('gets the HSV value', () => {
     const doc = getColorDoc('color.primary.green', token)
-    const { h, s, v } = doc.hsv
-    expect(`${h}, ${s}, ${v}`).to.equal('120, 100, 53')
+    expect(doc.hsv).to.equal('120º, 100, 53')
   })
 })

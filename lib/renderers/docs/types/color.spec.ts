@@ -4,10 +4,10 @@ import { isColorDoc } from './color.js'
 describe('isColorDoc', () => {
   const scss = 'color.green'
   const hex = '#008800'
-  const rgb = { r: 0, g: 136, b: 0, a: 1 }
-  const cmyk = { c: 100, m: 0, y: 100, k: 47, a: 1 }
-  const hsl = { h: 120, s: 100, l: 26.7, a: 1 }
-  const hsv = { h: 120, s: 100, v: 53.3, a: 1 }
+  const rgb = '0, 136, 0'
+  const cmyk = '100, 0, 100, 47'
+  const hsl = '120º, 100, 27'
+  const hsv = '120º, 100, 53'
 
   it('rejects undefined', () => {
     expect(isColorDoc(undefined)).to.equal(false)
@@ -157,20 +157,12 @@ describe('isColorDoc', () => {
     expect(isColorDoc({ scss, hex, rgb: 0, cmyk, hsl, hsv })).to.equal(false)
   })
 
-  it('rejects objects with a string rgb', () => {
-    expect(isColorDoc({ scss, hex, rgb: '0, 136, 0', cmyk, hsl, hsv })).to.equal(false)
-  })
-
   it('rejects objects with an array rgb', () => {
     expect(isColorDoc({ scss, hex, rgb: [0, 136, 0], cmyk, hsl, hsv })).to.equal(false)
   })
 
-  it('rejects objects with an empty object rgb', () => {
+  it('rejects objects with an object rgb', () => {
     expect(isColorDoc({ scss, hex, rgb: {}, cmyk, hsl, hsv })).to.equal(false)
-  })
-
-  it('rejects objects with an incorrectly formatted rgb', () => {
-    expect(isColorDoc({ scss, hex, rgb: { red: 0, blue: 136, green: 0 }, cmyk, hsl, hsv })).to.equal(false)
   })
 
   it('rejects objects no cmyk', () => {
@@ -201,20 +193,12 @@ describe('isColorDoc', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk: 0, hsl, hsv })).to.equal(false)
   })
 
-  it('rejects objects with a string cmyk', () => {
-    expect(isColorDoc({ scss, hex, rgb, cmyk: '100, 0, 100, 47', hsl, hsv })).to.equal(false)
-  })
-
   it('rejects objects with an array cmyk', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk: [100, 0, 100, 47], hsl, hsv })).to.equal(false)
   })
 
-  it('rejects objects with an empty object cmyk', () => {
+  it('rejects objects with an object cmyk', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk: {}, hsl, hsv })).to.equal(false)
-  })
-
-  it('rejects objects with an incorrectly formatted cmyk', () => {
-    expect(isColorDoc({ scss, hex, rgb, cmyk: { cyan: 100, magenta: 0, yellow: 100, black: 47 }, hsl, hsv })).to.equal(false)
   })
 
   it('rejects objects no hsl', () => {
@@ -245,20 +229,12 @@ describe('isColorDoc', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl: 0, hsv })).to.equal(false)
   })
 
-  it('rejects objects with a string hsl', () => {
-    expect(isColorDoc({ scss, hex, rgb, cmyk, hsl: '120, 100, 26.7', hsv })).to.equal(false)
-  })
-
   it('rejects objects with an array hsl', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl: [120, 100, 26.7], hsv })).to.equal(false)
   })
 
-  it('rejects objects with an empty object hsl', () => {
+  it('rejects objects with an object hsl', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl: {}, hsv })).to.equal(false)
-  })
-
-  it('rejects objects with an incorrectly formatted hsl', () => {
-    expect(isColorDoc({ scss, hex, rgb, cmyk, hsl: { hue: 120, saturation: 100, lightness: 26.7 }, hsv })).to.equal(false)
   })
 
   it('rejects objects no hsv', () => {
@@ -289,20 +265,12 @@ describe('isColorDoc', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl, hsv: 0 })).to.equal(false)
   })
 
-  it('rejects objects with a string hsv', () => {
-    expect(isColorDoc({ scss, hex, rgb, cmyk, hsl, hsv: '120, 100, 53.3' })).to.equal(false)
-  })
-
   it('rejects objects with an array hsv', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl, hsv: [120, 100, 53.3] })).to.equal(false)
   })
 
-  it('rejects objects with an empty object hsv', () => {
+  it('rejects objects with an object hsv', () => {
     expect(isColorDoc({ scss, hex, rgb, cmyk, hsl, hsv: {} })).to.equal(false)
-  })
-
-  it('rejects objects with an incorrectly formatted hsv', () => {
-    expect(isColorDoc({ scss, hex, rgb, cmyk, hsl, hsv: { hue: 120, saturation: 100, value: 53.3 } })).to.equal(false)
   })
 
   it('accepts an object with an undefined description', () => {

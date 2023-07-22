@@ -4,7 +4,7 @@ const fontWeights = ['thin', 'hairline', 'extra-light', 'ultra-light', 'light',
 
 type FontWeight = number | typeof fontWeights[number]
 
-const isFontWeight = (obj: any): boolean => {
+const isFontWeight = (obj: any): obj is FontWeight => {
   const type = typeof obj
   const types = ['string', 'number']
   if (!types.includes(type)) return false

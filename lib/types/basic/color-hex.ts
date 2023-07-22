@@ -6,7 +6,7 @@ const isHexit = (obj: any): boolean => {
   return valid.includes(obj)
 }
 
-const isColorHex = (obj: any): boolean => {
+const isColorHex = (obj: any): obj is ColorHex => {
   if (typeof obj !== 'string') return false
   const validLengths = [7, 9]
   const chars = obj.split('')

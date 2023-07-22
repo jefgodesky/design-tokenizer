@@ -2,7 +2,7 @@ const strokeStyles = ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 
 
 type StrokeStyleString = typeof strokeStyles[number]
 
-const isStrokeStyleString = (obj: any): boolean => strokeStyles.includes(obj)
+const isStrokeStyleString = (obj: any): obj is StrokeStyleString => strokeStyles.includes(obj)
 
 export default StrokeStyleString
 export { isStrokeStyleString, strokeStyles }

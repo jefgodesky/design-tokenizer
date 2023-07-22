@@ -1,9 +1,6 @@
-import { colord } from 'colord'
 import DerefColorToken from '../../../../types/tokens/dereferenced/color.js'
+import getHSVA from '../../types/color/hsva.js'
 
-const getColorHSVA = (token: DerefColorToken): string => {
-  const hsva = colord(token.$value).toHsv()
-  return `${hsva.h}º, ${hsva.s}, ${hsva.v}, ${hsva.a}`
-}
+const getColorHSVA = (token: DerefColorToken): string => getHSVA(token.$value)
 
 export default getColorHSVA

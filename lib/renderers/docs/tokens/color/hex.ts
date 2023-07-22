@@ -1,6 +1,6 @@
-import ColorHex from '../../../../types/basic/color-hex.js'
 import DerefColorToken from '../../../../types/tokens/dereferenced/color.js'
+import getHex from '../../types/color/hex.js'
 
-const getColorHex = (token: DerefColorToken): ColorHex => token.$value
+const getColorHex = (token: DerefColorToken): string => getHex(token.$value)
 
 export default getColorHex

@@ -1,9 +1,6 @@
-import { colord } from 'colord'
 import DerefColorToken from '../../../../types/tokens/dereferenced/color.js'
+import getRGBA from '../../types/color/rgba.js'
 
-const getColorRGBA = (token: DerefColorToken): string => {
-  const rgba = colord(token.$value).toRgb()
-  return `${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a}`
-}
+const getColorRGBA = (token: DerefColorToken): string => getRGBA(token.$value)
 
 export default getColorRGBA

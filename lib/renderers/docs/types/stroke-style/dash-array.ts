@@ -1,5 +1,5 @@
-import Dimension from '../../../../types/basic/dimension.js'
+import DerefStrokeStyleObject from '../../../../types/composite/dereferenced/stroke-style.js'
 
-const getDashArray = (arr: Dimension[]): string => `${arr.join(', ')}`
+const getDashArray = (style: DerefStrokeStyleObject): string => `${style.dashArray.join(', ')}`
 
 export default getDashArray

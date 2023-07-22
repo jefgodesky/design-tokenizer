@@ -7,4 +7,8 @@ describe('getLineCap', () => {
     const style: DerefStrokeStyleObject = { dashArray: ['0.5rem', '0.25rem'], lineCap: 'round' }
     expect(getLineCap(style)).to.equal('round')
   })
+
+  it('returns the string if given a string', () => {
+    expect(getLineCap('solid')).to.equal('solid')
+  })
 })

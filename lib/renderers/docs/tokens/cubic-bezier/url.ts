@@ -1,8 +1,6 @@
 import DerefCubicBezierToken from '../../../../types/tokens/dereferenced/cubic-bezier.js'
+import getCubicBezierURL from '../../types/cubic-bezier/url.js'
 
-const getCubicBezierURL = (token: DerefCubicBezierToken): string => {
-  const domain = 'https://cubic-bezier.com/'
-  return `${domain}#${token.$value.join(',')}`
-}
+const getCubicBezierTokenURL = (token: DerefCubicBezierToken): string => getCubicBezierURL(token.$value)
 
-export default getCubicBezierURL
+export default getCubicBezierTokenURL

@@ -4,8 +4,8 @@ import getFontWeight from './weight.js'
 
 describe('getFontWeight', () => {
   it('returns the font weight string', () => {
-    const token: DerefFontWeightToken = { $type: 'fontWeight', $value: 'solid' }
-    expect(getFontWeight(token)).to.equal('solid')
+    const token: DerefFontWeightToken = { $type: 'fontWeight', $value: 'normal' }
+    expect(getFontWeight(token)).to.equal('normal')
   })
 
   it('returns the font weight number as a string', () => {

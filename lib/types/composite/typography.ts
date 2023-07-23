@@ -2,6 +2,7 @@ import Dimension, { isDimension } from '../basic/dimension.js'
 import FontFamily, { isFontFamily } from '../basic/font-family.js'
 import FontWeight, { isFontWeight } from '../basic/font-weight.js'
 import Reference, { isReference } from '../basic/reference.js'
+import isObject from '../guards/object.js'
 
 interface Typography {
   fontFamily: FontFamily | Reference
@@ -13,7 +14,7 @@ interface Typography {
 }
 
 const isTypography = (obj: any): obj is Typography => {
-  if (obj === null || typeof obj !== 'object') return false
+  if (!isObject(obj)) return false
   const { fontFamily, fontSize, fontStyle, fontWeight, letterSpacing, lineHeight } = obj
   const acceptedFontStyles = ['normal', 'italic', 'oblique']
   const acceptedObliqueStyle = /oblique (\d+?)deg/i

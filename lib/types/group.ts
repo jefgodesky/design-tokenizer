@@ -14,13 +14,14 @@ import { isTypographyToken } from './tokens/typography.js'
 
 import Token from './token.js'
 import allUnreservedProps from './guards/all-unreserved-props.js'
+import isObject from './guards/object.js'
 
 interface Group {
   [key: string]: Group | Token | boolean | string | number | boolean[] | string[] | number[]
 }
 
 const isGroup = (obj: any): obj is Group => {
-  if (obj === null || Array.isArray(obj) || typeof obj !== 'object') return false
+  if (!isObject(obj)) return false
 
   const tokenTests = [isColorToken, isDimensionToken, isFontFamilyToken,
     isFontWeightToken, isDurationToken, isCubicBezierToken, isNumberToken,

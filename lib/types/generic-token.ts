@@ -1,5 +1,6 @@
 import allUnreservedProps from './guards/all-unreserved-props.js'
 import allUnreservedPropsRecursive from './guards/all-unreserved-props-recursive.js'
+import isObject from './guards/object.js'
 
 interface GenericToken<Type, Value> {
   $description?: string
@@ -12,7 +13,7 @@ interface GenericToken<Type, Value> {
 }
 
 const isGenericToken = (obj: any): boolean => {
-  if (obj === null || typeof obj !== 'object') return false
+  if (!isObject(obj)) return false
   const { $description, $type, $value, $extensions, ...other } = obj
   if ($value === undefined || $value === null || typeof $value === 'function') return false
   if ($description !== undefined && typeof $description !== 'string') return false

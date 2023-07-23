@@ -1,6 +1,7 @@
 import ColorHex, { isColorHex } from '../basic/color-hex.js'
 import Dimension, { isDimension } from '../basic/dimension.js'
 import Reference, { isReference } from '../basic/reference.js'
+import isObject from '../guards/object.js'
 
 interface Shadow {
   color: ColorHex | Reference
@@ -11,7 +12,7 @@ interface Shadow {
 }
 
 const isShadow = (obj: any): obj is Shadow => {
-  if (obj === null || typeof obj !== 'object') return false
+  if (!isObject(obj)) return false
   const { color, offsetX, offsetY, blur, spread } = obj
   if (color === undefined || !(isColorHex(color) || isReference(color))) return false
   if (offsetX === undefined || !(isDimension(offsetX) || isReference(offsetX))) return false

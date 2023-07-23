@@ -13,13 +13,14 @@ import { isDerefTransitionToken } from './tokens/dereferenced/transition.js'
 import { isDerefTypographyToken } from './tokens/dereferenced/typography.js'
 
 import DerefToken from './deref.js'
+import isObject from './guards/object.js'
 
 interface DerefTokenList {
   [key: string]: DerefToken
 }
 
 const isDerefTokenList = (obj: any): obj is DerefTokenList => {
-  if (obj === null || Array.isArray(obj)) return false
+  if (!isObject(obj)) return false
   return typeof obj === 'object' && Object.keys(obj).reduce((acc: boolean, key: string) => {
     const tests = [isDerefBorderToken, isDerefColorToken,
       isDerefCubicBezierToken, isDerefDimensionToken, isDerefDurationToken,

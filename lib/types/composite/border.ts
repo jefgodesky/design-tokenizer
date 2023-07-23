@@ -3,6 +3,7 @@ import Dimension, { isDimension } from '../basic/dimension.js'
 import Reference, { isReference } from '../basic/reference.js'
 import StrokeStyleObject, { isStrokeStyleObject } from './stroke-style.js'
 import StrokeStyleString, { isStrokeStyleString } from '../basic/stroke-style.js'
+import isObject from '../guards/object.js'
 
 interface Border {
   color: ColorHex | Reference
@@ -11,7 +12,7 @@ interface Border {
 }
 
 const isBorder = (obj: any): obj is Border => {
-  if (obj === null || typeof obj !== 'object') return false
+  if (!isObject(obj)) return false
   const { color, width, style } = obj
   if (color === undefined || !(isColorHex(color) || isReference(color))) return false
   if (width === undefined || !(isDimension(width) || isReference(width))) return false

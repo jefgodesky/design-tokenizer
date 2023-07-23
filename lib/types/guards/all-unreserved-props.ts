@@ -1,7 +1,8 @@
 import isUnreservedName from './unreserved-name.js'
+import isObject from './object.js'
 
 const allUnreservedProps = (obj: any): boolean => {
-  if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) return false
+  if (!isObject(obj)) return false
   return Object.keys(obj).reduce((acc: boolean, curr: string) => acc && isUnreservedName(curr), true)
 }
 

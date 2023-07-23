@@ -1,6 +1,7 @@
 import CubicBezier, { isCubicBezier } from '../basic/cubic-bezier.js'
 import Duration, { isDuration } from '../basic/duration.js'
 import Reference, { isReference } from '../basic/reference.js'
+import isObject from '../guards/object.js'
 
 interface Transition {
   duration: Duration | Reference
@@ -9,7 +10,7 @@ interface Transition {
 }
 
 const isTransition = (obj: any): obj is Transition => {
-  if (obj === null || typeof obj !== 'object') return false
+  if (!isObject(obj)) return false
   const { duration, delay, timingFunction } = obj
   if (duration === undefined || !(isDuration(duration) || isReference(duration))) return false
   if (delay === undefined || !(isDuration(delay) || isReference(delay))) return false

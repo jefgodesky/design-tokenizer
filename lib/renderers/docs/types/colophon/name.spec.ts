@@ -37,4 +37,8 @@ describe('getColophonName', () => {
   it('returns the name of the specified item if given an index', () => {
     expect(getColophonName(token, 1)).to.equal(arial.name)
   })
+
+  it('returns the name of the specified item if given a key', () => {
+    expect(getColophonName(token, 'arial')).to.equal(arial.name)
+  })
 })

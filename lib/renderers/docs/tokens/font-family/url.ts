@@ -1,7 +1,6 @@
 import DerefFontFamilyToken from '../../../../types/tokens/dereferenced/font-family.js'
+import getColophonURL from '../../types/colophon/url.js'
 
-const getFontFamilyURL = (token: DerefFontFamilyToken, family: string): string | undefined => {
-  return token.$extensions?.['com.github.jefgodesky.design-tokenizer']?.[family]?.url
-}
+const getFontFamilyURL = (token: DerefFontFamilyToken, family: string): string => getColophonURL(token, family)
 
 export default getFontFamilyURL

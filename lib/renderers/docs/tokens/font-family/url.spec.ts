@@ -7,26 +7,28 @@ describe('getFontFamilyURL', () => {
     $type: 'fontFamily',
     $value: ['Helvetica', 'sans-serif'],
     $extensions: {
-      'com.github.jefgodesky.design-tokenizer': {
-        helvetica: {
-          name: 'Helvetica',
-          designer: 'Max Miedinger and Eduard Hoffmann',
-          url: 'https://www.linotype.com/1308886/helvetica-family.html'
+      'com.npmjs.package.design-tokenizer': {
+        colophon: {
+          helvetica: {
+            name: 'Helvetica',
+            designer: 'Max Miedinger and Eduard Hoffmann',
+            url: 'https://www.linotype.com/1308886/helvetica-family.html'
+          }
         }
       }
     }
   }
 
-  it('returns undefined if no URL exists', () => {
+  it('returns null string if no URL exists', () => {
     const token: DerefFontFamilyToken = { $type: 'fontFamily', $value: ['Helvetica', 'sans-serif'] }
-    expect(getFontFamilyURL(token, 'Helvetica')).to.equal(undefined)
+    expect(getFontFamilyURL(token, 'Helvetica')).to.equal('')
   })
 
   it('returns the URL from a font family token if it exists', () => {
     expect(getFontFamilyURL(helvetica, 'helvetica')).to.equal('https://www.linotype.com/1308886/helvetica-family.html')
   })
 
-  it('returns undefined if the URL requested does not exist', () => {
-    expect(getFontFamilyURL(helvetica, 'Arial')).to.equal(undefined)
+  it('returns null string if the URL requested does not exist', () => {
+    expect(getFontFamilyURL(helvetica, 'Arial')).to.equal('')
   })
 })

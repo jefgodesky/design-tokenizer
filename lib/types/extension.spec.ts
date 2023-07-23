@@ -86,6 +86,42 @@ describe('isExtension', () => {
     expect(isExtension({ scss: { file: '_test.scss', variable: '$test' } })).to.equal(true)
   })
 
+  it('accepts an object with an undefined SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: undefined } })).to.equal(true)
+  })
+
+  it('rejects an object with a null SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: null } })).to.equal(false)
+  })
+
+  it('rejects an object with a function SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: () => {} } })).to.equal(false)
+  })
+
+  it('rejects an object with a true SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: true } })).to.equal(false)
+  })
+
+  it('rejects an object with a false SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: false } })).to.equal(false)
+  })
+
+  it('rejects an object with a number SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: 1 } })).to.equal(false)
+  })
+
+  it('accepts an object with a string SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: 'test' } })).to.equal(true)
+  })
+
+  it('rejects an object with an array SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: [] } })).to.equal(false)
+  })
+
+  it('rejects an object with an object SCSS module', () => {
+    expect(isExtension({ scss: { file: '_test.scss', variable: '$test', module: {} } })).to.equal(false)
+  })
+
   it('accepts an object with an undefined colophon property', () => {
     expect(isExtension({ colophon: undefined })).to.equal(true)
   })

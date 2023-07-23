@@ -53,6 +53,7 @@ import DerefStrokeStyleToken from './types/tokens/dereferenced/stroke-style.js'
 import DerefTransition from './types/composite/dereferenced/transition.js'
 import DerefTypographyToken from './types/tokens/dereferenced/typography.js'
 
+import Dictionary from './types/dictionary.js'
 import Extension from './types/extension.js'
 import Colophon from './types/colophon.js'
 import ColophonEntry from './types/colophon-entry.js'
@@ -156,6 +157,7 @@ export {
   DerefStrokeStyleToken,
   DerefTransition,
   DerefTypographyToken,
+  Dictionary,
   Extension,
   Colophon,
   ColophonEntry,

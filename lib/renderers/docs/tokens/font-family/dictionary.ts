@@ -4,21 +4,22 @@ import Dictionary from '../../../../types/dictionary.js'
 
 import getSCSSVariable from '../../scss.js'
 import getFontFamily from '../../types/font-family/font-family.js'
-import getColophonKeys from '../../types/colophon/keys.js'
-import getColophonName from '../../types/colophon/name.js'
-import getColophonDesigner from '../../types/colophon/designer.js'
-import getColophonURL from '../../types/colophon/url.js'
+import getFontFamilyTokenCSS from './css.js'
+import getFontFamilyKeys from './keys.js'
+import getFontFamilyName from './name.js'
+import getFontFamilyDesigner from './designer.js'
+import getFontFamilyURL from './url.js'
 
 const clone = rfdc()
 
 const addFontFamilyToDictionary = (name: string, token: DerefFontFamilyToken, dict: Dictionary): Dictionary => {
   const cpy = clone(dict)
 
-  const colophon = getColophonKeys(token)
+  const colophon = getFontFamilyKeys(token)
   for (const key of colophon) {
-    cpy[[name, key].join('.')] = getColophonName(token, key)
-    cpy[[name, key, 'designer'].join('.')] = getColophonDesigner(token, key)
-    cpy[[name, key, 'url'].join('.')] = getColophonURL(token, key)
+    cpy[[name, key].join('.')] = getFontFamilyName(token, key)
+    cpy[[name, key, 'designer'].join('.')] = getFontFamilyDesigner(token, key)
+    cpy[[name, key, 'url'].join('.')] = getFontFamilyURL(token, key)
   }
 
   const { $description } = token
@@ -28,6 +29,7 @@ const addFontFamilyToDictionary = (name: string, token: DerefFontFamilyToken, di
   if (scss.length > 0) cpy[name + '.scss'] = scss
 
   cpy[name] = getFontFamily(token.$value)
+  cpy[name + '.css'] = getFontFamilyTokenCSS(token)
 
   return cpy
 }

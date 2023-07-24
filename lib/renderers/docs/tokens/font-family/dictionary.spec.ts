@@ -72,6 +72,11 @@ describe('addFontFamilyToDictionary', () => {
     expect(actual['typeface.sans.helvetica.url']).to.equal('https://www.linotype.com/1308886/helvetica-family.html')
   })
 
+  it('adds CSS to the dictionary', () => {
+    const actual = addFontFamilyToDictionary('typeface.sans', token, before)
+    expect(actual['typeface.sans.css']).to.equal('"Helvetica", "Arial", sans-serif')
+  })
+
   it('doesn\'t add an SCSS variable unless there is one', () => {
     const actual = addFontFamilyToDictionary('typeface.sans', token, before)
     expect(actual['typeface.sans.scss']).to.equal(undefined)

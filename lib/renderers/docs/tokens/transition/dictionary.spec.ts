@@ -37,6 +37,11 @@ describe('addTransitionToDictionary', () => {
     expect(actual['transition.quick.timing.url']).to.equal('https://cubic-bezier.com/#0,0,0,0')
   })
 
+  it('adds the CSS to the dictionary', () => {
+    const actual = addTransitionToDictionary('transition.quick', token, before)
+    expect(actual['transition.quick.css']).to.equal('200ms cubic-bezier(0, 0, 0, 0) 0ms')
+  })
+
   it('doesn\'t add an SCSS variable unless there is one', () => {
     const actual = addTransitionToDictionary('transition.quick', token, before)
     expect(actual['transition.quick.scss']).to.equal(undefined)

@@ -7,6 +7,7 @@ import getTransitionDuration from './duration.js'
 import getTransitionDelay from './delay.js'
 import getTransitionTimingFunction from './timing.js'
 import getTransitionTimingURL from './timing-url.js'
+import getTransitionCSS from '../../../shared/css/transition.js'
 
 const clone = rfdc()
 
@@ -23,6 +24,7 @@ const addTransitionToDictionary = (name: string, token: DerefTransitionToken, di
   cpy[name + '.delay'] = getTransitionDelay(token)
   cpy[name + '.timing'] = getTransitionTimingFunction(token)
   cpy[name + '.timing.url'] = getTransitionTimingURL(token)
+  cpy[name + '.css'] = getTransitionCSS(token)
 
   return cpy
 }

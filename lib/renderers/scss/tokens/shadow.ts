@@ -1,8 +1,6 @@
 import DerefShadowToken from '../../../types/tokens/dereferenced/shadow.js'
+import getShadowCSS from '../../shared/css/shadow.js'
 
-const renderShadowToken = (name: string, token: DerefShadowToken): string => {
-  const { color, offsetX, offsetY, blur, spread } = token.$value
-  return `$${name}: ${offsetX} ${offsetY} ${blur} ${spread} ${color};`
-}
+const renderShadowToken = (name: string, token: DerefShadowToken): string => `$${name}: ${getShadowCSS(token)};`
 
 export default renderShadowToken

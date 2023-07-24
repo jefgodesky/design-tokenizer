@@ -62,6 +62,11 @@ describe('addShadowToDictionary', () => {
     expect(actual['shadow.basic.spread']).to.equal('0rem')
   })
 
+  it('adds the CSS to the dictionary', () => {
+    const actual = addShadowToDictionary('shadow.basic', token, before)
+    expect(actual['shadow.basic.css']).to.equal('0.5rem 0.5rem 1.5rem 0rem #00000080')
+  })
+
   it('doesn\'t add an SCSS variable unless there is one', () => {
     const actual = addShadowToDictionary('shadow.basic', token, before)
     expect(actual['shadow.basic.scss']).to.equal(undefined)

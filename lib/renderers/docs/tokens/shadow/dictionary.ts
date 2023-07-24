@@ -12,6 +12,7 @@ import getShadowOffsetX from './offset-x.js'
 import getShadowOffsetY from './offset-y.js'
 import getShadowBlur from './blur.js'
 import getShadowSpread from './spread.js'
+import getShadowCSS from '../../../shared/css/shadow.js'
 
 const clone = rfdc()
 
@@ -33,6 +34,7 @@ const addShadowToDictionary = (name: string, token: DerefShadowToken, dict: Dict
   cpy[name + '.offset.y'] = getShadowOffsetY(token)
   cpy[name + '.blur'] = getShadowBlur(token)
   cpy[name + '.spread'] = getShadowSpread(token)
+  cpy[name + '.css'] = getShadowCSS(token)
 
   return cpy
 }

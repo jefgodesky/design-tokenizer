@@ -7,7 +7,7 @@ import getFontWeight from './weight.js'
 
 const clone = rfdc()
 
-const addFontWeightTokenToDictionary = (name: string, token: DerefFontWeightToken, dict: Dictionary): Dictionary => {
+const addFontWeightToDictionary = (name: string, token: DerefFontWeightToken, dict: Dictionary): Dictionary => {
   const cpy = clone(dict)
 
   const { $description } = token
@@ -21,4 +21,4 @@ const addFontWeightTokenToDictionary = (name: string, token: DerefFontWeightToke
   return cpy
 }
 
-export default addFontWeightTokenToDictionary
+export default addFontWeightToDictionary

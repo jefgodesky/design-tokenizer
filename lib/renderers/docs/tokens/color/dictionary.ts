@@ -11,7 +11,7 @@ import getColorHSVA from './hsva.js'
 
 const clone = rfdc()
 
-const addColorTokenToDictionary = (name: string, token: DerefColorToken, dict: Dictionary): Dictionary => {
+const addColorToDictionary = (name: string, token: DerefColorToken, dict: Dictionary): Dictionary => {
   const cpy = clone(dict)
 
   const { $description } = token
@@ -29,4 +29,4 @@ const addColorTokenToDictionary = (name: string, token: DerefColorToken, dict: D
   return cpy
 }
 
-export default addColorTokenToDictionary
+export default addColorToDictionary

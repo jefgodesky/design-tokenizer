@@ -7,7 +7,7 @@ import getDimension from './dimension.js'
 
 const clone = rfdc()
 
-const addDimensionTokenToDictionary = (name: string, token: DerefDimensionToken, dict: Dictionary): Dictionary => {
+const addDimensionToDictionary = (name: string, token: DerefDimensionToken, dict: Dictionary): Dictionary => {
   const cpy = clone(dict)
 
   const { $description } = token
@@ -21,4 +21,4 @@ const addDimensionTokenToDictionary = (name: string, token: DerefDimensionToken,
   return cpy
 }
 
-export default addDimensionTokenToDictionary
+export default addDimensionToDictionary

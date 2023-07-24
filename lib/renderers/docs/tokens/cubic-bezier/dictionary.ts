@@ -8,7 +8,7 @@ import getCubicBezierTokenURL from './url.js'
 
 const clone = rfdc()
 
-const addCubicBezierTokenToDictionary = (name: string, token: DerefCubicBezierToken, dict: Dictionary): Dictionary => {
+const addCubicBezierToDictionary = (name: string, token: DerefCubicBezierToken, dict: Dictionary): Dictionary => {
   const cpy = clone(dict)
 
   const { $description } = token
@@ -23,4 +23,4 @@ const addCubicBezierTokenToDictionary = (name: string, token: DerefCubicBezierTo
   return cpy
 }
 
-export default addCubicBezierTokenToDictionary
+export default addCubicBezierToDictionary

@@ -11,7 +11,7 @@ import getColophonURL from '../../types/colophon/url.js'
 
 const clone = rfdc()
 
-const addFontFamilyokenToDictionary = (name: string, token: DerefFontFamilyToken, dict: Dictionary): Dictionary => {
+const addFontFamilyToDictionary = (name: string, token: DerefFontFamilyToken, dict: Dictionary): Dictionary => {
   const cpy = clone(dict)
 
   const colophon = getColophonKeys(token)
@@ -32,4 +32,4 @@ const addFontFamilyokenToDictionary = (name: string, token: DerefFontFamilyToken
   return cpy
 }
 
-export default addFontFamilyokenToDictionary
+export default addFontFamilyToDictionary

@@ -1,35 +1,35 @@
 import { expect } from 'chai'
 import DerefFontWeightToken from '../../../../types/tokens/dereferenced/font-weight.js'
-import addFontWeightTokenToDictionary from './dictionary.js'
+import addFontWeightToDictionary from './dictionary.js'
 
-describe('addFontWeightTokenToDictionary', () => {
+describe('addFontWeightToDictionary', () => {
   const before = {}
   const token: DerefFontWeightToken = { $type: 'fontWeight', $value: 'normal' }
 
   it('doesn\'t have a description if the token doesn\'t', () => {
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', token, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', token, before)
     expect(actual['typography.weight.baseline.description']).to.equal(undefined)
   })
 
   it('adds the description to the dictionary', () => {
     const described = { ...token, $description: 'Baseline weight' }
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', described, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', described, before)
     expect(actual['typography.weight.baseline.description']).to.equal('Baseline weight')
   })
 
   it('adds the font weight string to the dictionary', () => {
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', token, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', token, before)
     expect(actual['typography.weight.baseline']).to.equal('normal')
   })
 
   it('adds the font weight number to the dictionary', () => {
     const token: DerefFontWeightToken = { $type: 'fontWeight', $value: 400 }
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', token, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', token, before)
     expect(actual['typography.weight.baseline']).to.equal('400')
   })
 
   it('doesn\'t add an SCSS variable unless there is one', () => {
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', token, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', token, before)
     expect(actual['typography.weight.baseline.scss']).to.equal(undefined)
   })
 
@@ -43,7 +43,7 @@ describe('addFontWeightTokenToDictionary', () => {
       }
     }
 
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', sassy, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', sassy, before)
     expect(actual['typography.weight.baseline.scss']).to.equal('$weight-base')
   })
 
@@ -57,7 +57,7 @@ describe('addFontWeightTokenToDictionary', () => {
       }
     }
 
-    const actual = addFontWeightTokenToDictionary('typography.weight.baseline', sassy, before)
+    const actual = addFontWeightToDictionary('typography.weight.baseline', sassy, before)
     expect(actual['typography.weight.baseline.scss']).to.equal('typography.$weight-base')
   })
 })

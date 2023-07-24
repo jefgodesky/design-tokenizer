@@ -12,6 +12,7 @@ import getBorderWidth from './width.js'
 import getBorderStyle from './style.js'
 import getBorderStyleDashArray from './dash-array.js'
 import getBorderStyleLineCap from './line-cap.js'
+import getBorderCSS from '../../../shared/css/border.js'
 
 const clone = rfdc()
 
@@ -31,6 +32,7 @@ const addBorderToDictionary = (name: string, token: DerefBorderToken, dict: Dict
   cpy[name + '.color.hsva'] = getBorderHSVA(token)
   cpy[name + '.width'] = getBorderWidth(token)
   cpy[name + '.style'] = getBorderStyle(token)
+  cpy[name + '.css'] = getBorderCSS(token)
 
   const { style } = token.$value
   if (typeof style !== 'string') cpy[name + '.style.dash-array'] = getBorderStyleDashArray(token)

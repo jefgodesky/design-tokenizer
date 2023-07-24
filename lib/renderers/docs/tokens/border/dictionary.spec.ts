@@ -78,6 +78,16 @@ describe('addBorderToDictionary', () => {
     expect(actual['border.custom.style.line-cap']).to.equal('round')
   })
 
+  it('adds CSS to the dictionary', () => {
+    const actual = addBorderToDictionary('border.basic', token, before)
+    expect(actual['border.basic.css']).to.equal('1px solid #000000')
+  })
+
+  it('adds CSS as dashed to the dictionary if given custom style', () => {
+    const actual = addBorderToDictionary('border.custom', custom, before)
+    expect(actual['border.custom.css']).to.equal('1px dashed #000000')
+  })
+
   it('doesn\'t add an SCSS variable unless there is one', () => {
     const actual = addBorderToDictionary('border.basic', token, before)
     expect(actual['border.basic.scss']).to.equal(undefined)

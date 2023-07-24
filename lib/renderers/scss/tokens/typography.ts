@@ -1,6 +1,6 @@
 import DerefTypographyToken from '../../../types/tokens/dereferenced/typography.js'
 import getAbsoluteLineHeight from '../../shared/line-height-absolute.js'
-import transformFontFamily from '../transformers/font-family.js'
+import getFontFamilyCSS from '../../shared/css/font-family.js'
 
 const renderTypographyToken = (name: string, token: DerefTypographyToken): string => {
   const { fontFamily, fontSize, fontStyle, fontWeight, letterSpacing } = token.$value
@@ -9,7 +9,7 @@ const renderTypographyToken = (name: string, token: DerefTypographyToken): strin
     fontStyle,
     fontWeight,
     `${fontSize}/${absLineHeight}`,
-    transformFontFamily(fontFamily)
+    getFontFamilyCSS(fontFamily)
   ].filter(elem => elem !== undefined)
   return [
     `$${name}: ${elems.join(' ')};`,

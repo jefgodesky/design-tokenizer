@@ -1,9 +1,6 @@
 import DerefTransitionToken from '../../../types/tokens/dereferenced/transition.js'
-import getCubicBezierCSS from '../../shared/css/cubic-bezier.js'
+import getTransitionCSS from '../../shared/css/transition.js'
 
-const renderTransitionToken = (name: string, token: DerefTransitionToken): string => {
-  const { duration, delay, timingFunction } = token.$value
-  return `$${name}: ${duration} ${getCubicBezierCSS(timingFunction)} ${delay};`
-}
+const renderTransitionToken = (name: string, token: DerefTransitionToken): string => `$${name}: ${getTransitionCSS(token)};`
 
 export default renderTransitionToken

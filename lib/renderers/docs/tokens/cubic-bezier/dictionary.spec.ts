@@ -27,6 +27,11 @@ describe('addCubicBezierToDictionary', () => {
     expect(actual['curve.flat.url']).to.equal('https://cubic-bezier.com/#0,0,0,0')
   })
 
+  it('adds CSS to the dictionary', () => {
+    const actual = addCubicBezierToDictionary('curve.flat', token, before)
+    expect(actual['curve.flat.css']).to.equal('cubic-bezier(0, 0, 0, 0)')
+  })
+
   it('doesn\'t add an SCSS variable unless there is one', () => {
     const actual = addCubicBezierToDictionary('curve.flat', token, before)
     expect(actual['curve.flat.scss']).to.equal(undefined)

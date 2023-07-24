@@ -5,6 +5,7 @@ import Dictionary from '../../../../types/dictionary.js'
 import getSCSSVariable from '../../scss.js'
 import getCubicBezierTokenString from './string.js'
 import getCubicBezierTokenURL from './url.js'
+import getCubicBezierTokenCSS from './css.js'
 
 const clone = rfdc()
 
@@ -19,6 +20,7 @@ const addCubicBezierToDictionary = (name: string, token: DerefCubicBezierToken, 
 
   cpy[name] = getCubicBezierTokenString(token)
   cpy[name + '.url'] = getCubicBezierTokenURL(token)
+  cpy[name + '.css'] = getCubicBezierTokenCSS(token)
 
   return cpy
 }

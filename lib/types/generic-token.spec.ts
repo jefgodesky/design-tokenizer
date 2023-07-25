@@ -186,14 +186,6 @@ describe('isGenericToken', () => {
     expect(isGenericToken({ $type: 'Test', $value: 1, $extensions: { a: 1, b: { c: 2 } } })).to.equal(true)
   })
 
-  it('rejects an object with an object with reserved keys for $extensions', () => {
-    expect(isGenericToken({ $type: 'Test', $value: 1, $extensions: { $reserved: true } })).to.equal(false)
-  })
-
-  it('rejects an object with an object with nested reserved keys for $extensions', () => {
-    expect(isGenericToken({ $type: 'Test', $value: 1, $extensions: { a: { $reserved: true } } })).to.equal(false)
-  })
-
   it('accepts an object with additional properties', () => {
     expect(isGenericToken({ $type: 'Test', $value: 1, other: true })).to.equal(true)
   })

@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs'
 import { program } from 'commander'
-import yaml from 'yaml'
 
 import ColorHex from './types/basic/color-hex.js'
 import CubicBezier from './types/basic/cubic-bezier.js'
@@ -80,7 +79,7 @@ program.name(pkg.name)
   .description(pkg.description)
   .version(pkg.version)
   .option('-f, --file <file>', 'JSON file containing design tokens, formatted per the W3C Design Tokens Format Module.')
-  .option('-c, --config <config>', 'YAML configuration specifying what you would like to output.')
+  .option('--scss', 'Create SCSS files.')
 
 try {
   program.parse()
@@ -89,22 +88,15 @@ try {
   const contents = readFileSync(options.file, { encoding: 'utf8' })
   const data = JSON.parse(contents)
   if (!isGroup(data)) throw new TypeError(`The JSON found in ${options.file as string} does not conform to the W3C Design Tokens Format Module.`)
-  const dictionary = resolveReferences(getTokenList(data))
+  const tokens = resolveReferences(getTokenList(data))
 
-  const configuration = readFileSync(options.config, { encoding: 'utf8' })
-  const config = yaml.parse(configuration)
+  const renderers = []
+  if (options.scss as boolean) renderers.push({ key: 'scss', render: renderSCSS, acknowledgment: 'Rendering tokens to SCSS variables...' })
 
-  const renderers: { [key: string]: { acknowledgment: string, render: Function } } = {
-    scss: { acknowledgment: 'Rendering tokens to SCSS variables...', render: renderSCSS }
-  }
-
-  for (const key in config) {
-    if (!Object.keys(renderers).includes(key)) {
-      console.error(`${key}: We do not have any renderers of type "${key}". Options are: ${Object.keys(renderers).join(', ')}. Skipping "${key}."`)
-      continue
-    }
-    console.log(`${key}: ${renderers[key].acknowledgment}`)
-    renderers[key].render(dictionary, config[key])
+  for (const renderer of renderers) {
+    const { key, render, acknowledgment } = renderer
+    console.log(`${key}: ${acknowledgment}`)
+    render(tokens)
   }
 } catch (err) {
   console.error(err)

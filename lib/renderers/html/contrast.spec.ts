@@ -9,6 +9,15 @@ describe('getContrastChecks', () => {
       'color.white': { $type: 'color', $value: '#ffffff' }
     }
     const checks = getContrastChecks(list)
-    expect(JSON.stringify(checks)).to.equal('[{"a":{"$type":"color","$value":"#000000"},"b":{"$type":"color","$value":"#ffffff"},"normal":{"aa":true,"aaa":true},"large":{"aa":true,"aaa":true}}]')
+    expect(JSON.stringify(checks)).to.equal('[{"a":{"$type":"color","$value":"#000000","$description":"color.black"},"b":{"$type":"color","$value":"#ffffff","$description":"color.white"},"normal":{"aa":true,"aaa":true},"large":{"aa":true,"aaa":true}}]')
+  })
+
+  it('preserves existing descriptions', () => {
+    const list: DerefTokenList = {
+      'color.black': { $type: 'color', $value: '#000000', $description: 'Black' },
+      'color.white': { $type: 'color', $value: '#ffffff', $description: 'White' }
+    }
+    const checks = getContrastChecks(list)
+    expect(JSON.stringify(checks)).to.equal('[{"a":{"$type":"color","$value":"#000000","$description":"Black"},"b":{"$type":"color","$value":"#ffffff","$description":"White"},"normal":{"aa":true,"aaa":true},"large":{"aa":true,"aaa":true}}]')
   })
 })

@@ -12,7 +12,7 @@ describe('getColorPairs', () => {
       'spacing.vertical': { $type: 'dimension', $value: '1rem' }
     }
     const pairs = getColorPairs(list)
-    const expected = '[[{"$type":"color","$value":"#000000"},{"$type":"color","$value":"#ffffff"}],[{"$type":"color","$value":"#000000"},{"$type":"color","$value":"#008800"}],[{"$type":"color","$value":"#000000"},{"$type":"color","$value":"#000088"}],[{"$type":"color","$value":"#ffffff"},{"$type":"color","$value":"#008800"}],[{"$type":"color","$value":"#ffffff"},{"$type":"color","$value":"#000088"}],[{"$type":"color","$value":"#008800"},{"$type":"color","$value":"#000088"}]]'
+    const expected = '[[{"$type":"color","$value":"#000000","$description":"color.black"},{"$type":"color","$value":"#ffffff","$description":"color.white"}],[{"$type":"color","$value":"#000000","$description":"color.black"},{"$type":"color","$value":"#008800","$description":"color.green"}],[{"$type":"color","$value":"#000000","$description":"color.black"},{"$type":"color","$value":"#000088","$description":"color.blue"}],[{"$type":"color","$value":"#ffffff","$description":"color.white"},{"$type":"color","$value":"#008800","$description":"color.green"}],[{"$type":"color","$value":"#ffffff","$description":"color.white"},{"$type":"color","$value":"#000088","$description":"color.blue"}],[{"$type":"color","$value":"#008800","$description":"color.green"},{"$type":"color","$value":"#000088","$description":"color.blue"}]]'
     expect(JSON.stringify(pairs)).to.equal(expected)
   })
 })

@@ -83,6 +83,7 @@ program.name(pkg.name)
   .option('--scss', 'Create SCSS files.')
   .option('--html-src <htmlSrc>', 'Directory to pull HTML source files from.')
   .option('--html-dist <htmlDist>', 'Directory to save finished HTML files to.')
+  .option('--add-dictionary <addDictionary>', 'Provide a JSON file that provides the start of the ditionary used in compiling documentation. Every property in this JSON file should be a string; any other properties will be ignored.')
 
 try {
   program.parse()
@@ -93,6 +94,9 @@ try {
   if (!isGroup(data)) throw new TypeError(`The JSON found in ${options.file as string} does not conform to the W3C Design Tokens Format Module.`)
   const tokens = resolveReferences(getTokenList(data))
 
+  const additionalContents = options.addDictionary === undefined ? '{}' : readFileSync(options.addDictionary, { encoding: 'utf8' })
+  const add = JSON.parse(additionalContents)
+
   if (options.scss as boolean) {
     console.log('scss: Rendering tokens to SCSS variables...')
     renderSCSS(tokens)
@@ -100,7 +104,7 @@ try {
 
   if (options.htmlSrc !== undefined && options.htmlDist !== undefined) {
     console.log('html: Rendering HTML documentation...')
-    renderHTML(tokens, options.htmlSrc, options.htmlDist)
+    renderHTML(tokens, { indir: options.htmlSrc, outdir: options.htmlDist, add })
   }
 } catch (err) {
   console.error(err)

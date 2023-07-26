@@ -20,7 +20,7 @@ describe('renderSCSS', () => {
     expect(actual).to.equal('$green: #008800; // color.green')
   })
 
-  it('renders differently prefixed tokens to different files', () => {
+  it('can render to different files', () => {
     const list: DerefTokenList = {
       'color.green': { $type: 'color', $value: '#008800', $extensions: { 'com.npmjs.package.design-tokenizer': { scss: { file: 'scss/modules/_colors.scss', variable: 'green' } } } },
       'breakpoint.primary': { $type: 'dimension', $value: '40rem', $extensions: { 'com.npmjs.package.design-tokenizer': { scss: { file: 'scss/modules/_breakpoints.scss', variable: 'primary' } } } }

@@ -67,6 +67,7 @@ import getTokenList from './parsers/get-token-list.js'
 import resolveReferences from './parsers/resolve-references.js'
 
 import renderSCSS from './renderers/scss/render.js'
+import renderHTML from './renderers/html/render.js'
 
 import pkg from '../package.json' assert { type: 'json' }
 
@@ -80,6 +81,8 @@ program.name(pkg.name)
   .version(pkg.version)
   .option('-f, --file <file>', 'JSON file containing design tokens, formatted per the W3C Design Tokens Format Module.')
   .option('--scss', 'Create SCSS files.')
+  .option('--html-src <htmlSrc>', 'Directory to pull HTML source files from.')
+  .option('--html-dist <htmlDist>', 'Directory to save finished HTML files to.')
 
 try {
   program.parse()
@@ -90,13 +93,14 @@ try {
   if (!isGroup(data)) throw new TypeError(`The JSON found in ${options.file as string} does not conform to the W3C Design Tokens Format Module.`)
   const tokens = resolveReferences(getTokenList(data))
 
-  const renderers = []
-  if (options.scss as boolean) renderers.push({ key: 'scss', render: renderSCSS, acknowledgment: 'Rendering tokens to SCSS variables...' })
+  if (options.scss as boolean) {
+    console.log('scss: Rendering tokens to SCSS variables...')
+    renderSCSS(tokens)
+  }
 
-  for (const renderer of renderers) {
-    const { key, render, acknowledgment } = renderer
-    console.log(`${key}: ${acknowledgment}`)
-    render(tokens)
+  if (options.htmlSrc !== undefined && options.htmlDist !== undefined) {
+    console.log('html: Rendering HTML documentation...')
+    renderHTML(tokens, options.htmlSrc, options.htmlDist)
   }
 } catch (err) {
   console.error(err)

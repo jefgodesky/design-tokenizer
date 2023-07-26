@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import DerefTokenList from '../../types/deref-token-list.js'
+import Dictionary from '../../types/dictionary.js'
 import getDictionary from './dictionary.js'
 
 describe('getDictionary', () => {
@@ -66,5 +67,11 @@ describe('getDictionary', () => {
   it('adds typography tokens to the dictionary', () => {
     const list: DerefTokenList = { 'typography.body': { $type: 'typography', $value: { fontFamily: ['Helvetica', 'Arial', 'sans-serif'], fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0rem', lineHeight: 1.2 } } }
     expect(getDictionary(list)['typography.body.css']).to.equal('normal 1rem/1.20rem "Helvetica", "Arial", sans-serif')
+  })
+
+  it('can take additional fields to the dictionary', () => {
+    const list: DerefTokenList = { 'typography.body': { $type: 'typography', $value: { fontFamily: ['Helvetica', 'Arial', 'sans-serif'], fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0rem', lineHeight: 1.2 } } }
+    const additional: Dictionary = { test: '42' }
+    expect(getDictionary(list, additional).test).to.equal('42')
   })
 })

@@ -29,9 +29,7 @@ import addShadowToDictionary from './tokens/shadow/dictionary.js'
 import addGradientToDictionary from './tokens/gradient/dictionary.js'
 import addTypographyToDictionary from './tokens/typography/dictionary.js'
 
-const getDictionary = (list: DerefTokenList): Dictionary => {
-  let dict: Dictionary = {}
-
+const getDictionary = (list: DerefTokenList, dict: Dictionary = {}): Dictionary => {
   for (const key in list) {
     const token = list[key]
     if (token.$type === 'color' && isDerefColorToken(token)) {

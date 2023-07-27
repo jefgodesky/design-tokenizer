@@ -555,3 +555,28 @@ or any of the color options above (`hex`, `rgba`,
 `cmyka`, `hsla`, or `hsva`) to access their
 colors (e.g., `gradient.0.color.hex` or
 `gradient.1.color.rgba`).
+
+## Roadmap
+
+SCSS and HTML are all I need for my own purposes
+(at least for the time being), but I designed
+this with future applications in mind. I’ll be
+keeping an eye on the [W3C Design Tokens Format Module](https://design-tokens.github.io/community-group/format/)
+as it develops and making any necessary changes
+I won’t mark this tool as v1 until
+the W3C adopts the format module, and then I
+intend to keep the major and minor versions in
+sync with the format module, so it will always be
+easy to tell which version of the format module
+any given version of this tool supports.
+ 
+If there are other things you’d like this tool
+to do (e.g., render to Markdown files in addition
+to HTML, or support other metadata for tokens),
+please [submit those ideas as issues on Github](https://github.com/jefgodesky/design-tokenizer/issues)
+and mark them with the **enhancement** label.
+There are definitely more things that this tool
+could do, but implementing every feature one can
+imagine is a great way to build terrible software,
+so instead we’ll stick to implementing features
+only when there are actual use cases for them.

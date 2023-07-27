@@ -501,6 +501,49 @@ This is a special variable that will be
 replaced with a set of swatches made for all of
 the color tokens found in your source file.
 
+### `{{ color-contrast }}`
+
+**Token Types:** N/A
+
+This variable produces a report which compares
+each of your color tokens against each other
+color token, provides examples of what they
+look like as background and foreground colors
+for text, and tell you if the combination passes
+the WCAG AA and/or AAA criteria for readability.
+
+### `{{ color-contrast.normal.aa }}`
+
+**Token Types:** N/A
+
+This variable acts just like `{{ color-contrast }}`,
+except it only shows the combinations that meet
+the WCAG AA standard for body text.
+
+### `{{ color-contrast.normal.aaa }}`
+
+**Token Types:** N/A
+
+This variable acts just like `{{ color-contrast }}`,
+except it only shows the combinations that meet
+the WCAG AAA standard for body text.
+
+### `{{ color-contrast.large.aa }}`
+
+**Token Types:** N/A
+
+This variable acts just like `{{ color-contrast }}`,
+except it only shows the combinations that meet
+the WCAG AA standard for large text.
+
+### `{{ color-contrast.large.aaa }}`
+
+**Token Types:** N/A
+
+This variable acts just like `{{ color-contrast }}`,
+except it only shows the combinations that meet
+the WCAG AAA standard for large text.
+
 ### Gradients
 
 Since gradients use an array of objects to

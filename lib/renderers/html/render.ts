@@ -3,11 +3,17 @@ import DerefTokenList from '../../types/deref-token-list.js'
 import Dictionary from '../../types/dictionary.js'
 import getDictionary from '../docs/dictionary.js'
 import getSwatches from './swatches.js'
+import getContrastReport from './contrast-report.js'
 
 const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: string, add?: Dictionary, verbose?: boolean } = { verbose: true }): void => {
   const { indir, outdir, add, verbose } = options
   const dict = getDictionary(list, add)
   dict.swatches = getSwatches(list)
+  dict['color-contrast'] = getContrastReport(list)
+  dict['color-contrast.normal.aa'] = getContrastReport(list, { normal: 'aa' })
+  dict['color-contrast.normal.aaa'] = getContrastReport(list, { normal: 'aaa' })
+  dict['color-contrast.large.aa'] = getContrastReport(list, { large: 'aa' })
+  dict['color-contrast.large.aaa'] = getContrastReport(list, { large: 'aaa' })
 
   if (indir === undefined) console.error('html: Error producing HTML: input directory is undefined.')
   if (outdir === undefined) console.error('html: Error producing HTML: output directory is undefined.')

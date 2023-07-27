@@ -2,6 +2,7 @@
   "name": "design-tokenizer",
   "version": "0.1.1",
   "description": "A tool for working with W3C Design Token JSON files.",
+  "keywords": ["design", "design system", "design tokens", "css", "sass", "scss", "html"],
   "main": "dist/index.js",
   "bin": {
     "design-tokenizer": "dist/index.js"

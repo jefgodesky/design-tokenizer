@@ -1,7 +1,6 @@
 # Design Tokenizer
 
 ![npm](https://img.shields.io/npm/v/design-tokenizer)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/design-tokenizer)
 
 This is a command line translation tool for
 design tokens formatted according to the

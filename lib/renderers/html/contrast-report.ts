@@ -1,7 +1,11 @@
 import DerefTokenList from '../../types/deref-token-list.js'
 import getContrastChecks from './contrast.js'
 
-const getContrastReport = (list: DerefTokenList, rating: { normal?: string, large?: string } = {}): string => {
+const getContrastReport = (list: DerefTokenList, rating: { normal?: string, large?: string } = {}, skip: string[] = []): string => {
+  const skipLower = skip.map(str => str.toLowerCase())
+  const skipAA = skipLower.includes('aa')
+  const skipAAA = skipLower.includes('aaa')
+
   const checks = getContrastChecks(list)
     .filter(check => {
       const { normal, large } = rating
@@ -33,8 +37,10 @@ const getContrastReport = (list: DerefTokenList, rating: { normal?: string, larg
       const clgaa = `lg aa ${lgaa.toLocaleLowerCase()}`
       const clgaaa = `lg aaa ${lgaaa.toLocaleLowerCase()}`
 
-      const results = `<table><thead><tr><th class="m" colspan="2">Normal Text</th><th class="lg" colspan="2">Large Text</th></tr></thead><tbody><tr><th class="${cmaa}">AA</th><td class="${cmaa}">${maa}</td><th class="${clgaa}">AA</th><td class="${clgaa}">${lgaa}</td></tr><tr><th class="${cmaaa}">AAA</th><td class="${cmaaa}">${maaa}</td><th class="${clgaaa}">AAA</th><td class="${clgaaa}">${lgaaa}</td></tr></tbody></table>`
-      return `<section class="${classes.join(' ')}"><h4>${title}</h4>${x1}${x2}${results}</section>`
+      const aa = skipAA ? '' : `<tr><th class="${cmaa}">AA</th><td class="${cmaa}">${maa}</td><th class="${clgaa}">AA</th><td class="${clgaa}">${lgaa}</td></tr>`
+      const aaa = skipAAA ? '' : `<tr><th class="${cmaaa}">AAA</th><td class="${cmaaa}">${maaa}</td><th class="${clgaaa}">AAA</th><td class="${clgaaa}">${lgaaa}</td></tr>`
+      const table = skipAA && skipAAA ? '' : `<table><thead><tr><th class="m" colspan="2">Normal Text</th><th class="lg" colspan="2">Large Text</th></tr></thead><tbody>${aa}${aaa}</tbody></table>`
+      return `<section class="${classes.join(' ')}"><h4>${title}</h4>${x1}${x2}${table}</section>`
     })
   return checks.length > 0 ? `<section class="contrast-reports">${checks.join('')}</section>` : ''
 }

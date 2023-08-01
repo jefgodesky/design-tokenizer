@@ -28,9 +28,9 @@ const getSwatch = (name: string, token: DerefColorToken): string => {
   ]
 
   if (scss.length > 0) rows.push(['SCSS', scss])
-  const body = rows.map(arr => `<tr><th>${arr[0]}</th><td>${arr[1]}</td></tr>`).join('')
+  const body = rows.map(arr => `<dt>${arr[0]}</dt><dd>${arr[1]}</dd>`).join('')
   const style = `background-color: ${token.$value}; color: ${foreground};`
-  return `<section class="swatch ${slug}" style="${style}"><h4>${title}</h4><table>${body}</table></section>`
+  return `<section class="swatch ${slug}" style="${style}"><h4>${title}</h4><dl>${body}</dl></section>`
 }
 
 export default getSwatch

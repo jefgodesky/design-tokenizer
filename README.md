@@ -1,6 +1,10 @@
 # Design Tokenizer
 
-![npm](https://img.shields.io/npm/v/design-tokenizer)
+[![Tests](https://img.shields.io/github/actions/workflow/status/jefgodesky/design-tokenizer/test.yml)](https://github.com/jefgodesky/design-tokenizer/actions/workflows/test.yml)
+[![npm version](https://img.shields.io/npm/v/design-tokenizer)](https://www.npmjs.com/package/design-tokenizer)
+[![npm downloads](https://badgen.net/npm/dm/design-tokenizer)](https://www.npmjs.com/package/design-tokenizer)
+[![License](https://badgen.net/github/license/jefgodesky/design-tokenizer)](https://github.com/jefgodesky/design-tokenizer/blob/master/LICENSE)
+[![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard)
 
 This is a command line translation tool for
 design tokens formatted according to the

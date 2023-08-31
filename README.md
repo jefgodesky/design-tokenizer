@@ -504,6 +504,18 @@ This is a special variable that will be
 replaced with a set of swatches made for all of
 the color tokens found in your source file.
 
+### `{{ swatches.PREFIX }}`
+
+**Token Types:** N/A
+
+This option also presents a set of color swatches,
+like `{{ swatches }}`, but with this option you
+can also provide a prefix which will limit the
+colors included in the set to those that share
+that prefix. This allows you to separate various
+themes or sets of colors in your design tokens
+(e.g., light and dark themes).
+
 ### `{{ color-contrast }}`
 
 **Token Types:** N/A

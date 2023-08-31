@@ -41,7 +41,17 @@ const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: st
     let working = readFileSync(`${indir}/${file.name}`, { encoding: 'utf8' })
     for (const key in dict) {
       working = working.replaceAll(`{{ ${key} }}`, dict[key])
+
+      // Render custom swatch sets
+      const regex = /{{ swatches\.(.*?) }}/
+      const customSwatches = working.match(new RegExp(regex, 'gm'))?.map(m => m.match(regex))
+      if (customSwatches !== undefined && customSwatches !== null) {
+        for (const ref of customSwatches) {
+          if (ref !== null) working = working.replace(ref[0], getSwatches(list, ref[1]))
+        }
+      }
     }
+
     writeFileSync(`${outdir}/${file.name}`, working, { encoding: 'utf8' })
     if (verbose !== false) console.log(`html: Generating ${outdir}/${file.name}`)
   }

@@ -10,7 +10,7 @@ const getSwatches = (list: DerefTokenList, prefix: string = ''): string => {
       swatches.push(getSwatch(key, token))
     }
   }
-  return `<section class="swatches" id="swatches">${swatches.join('')}</section>`
+  return `<section class="swatches">${swatches.join('')}</section>`
 }
 
 export default getSwatches

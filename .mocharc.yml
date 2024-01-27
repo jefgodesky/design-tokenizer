@@ -1,7 +1,9 @@
 exit: true
-extension: ['ts']
-loader: 'ts-node/esm'
+extension:
+  - ts
 recursive: true
-require:
-  - 'ts-node/register'
 spec: './lib/**/*.spec.ts'
+node-option:
+  - experimental-specifier-resolution=node
+  - import=tsx/esm
+  - trace-uncaught

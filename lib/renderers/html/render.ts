@@ -6,6 +6,7 @@ import getHTMLSources from './get-html-sources.js'
 import getDictionary from '../docs/dictionary.js'
 import getSwatches from './swatches.js'
 import addContrastReportToDict from './contrast-report-dict.js'
+import renderLoops from './loops.js'
 import renderSwatches from './swatches-custom.js'
 
 const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: string, add?: Dictionary, verbose?: boolean, base?: string } = { verbose: true }): void => {
@@ -17,6 +18,7 @@ const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: st
     const files = getHTMLSources(indir)
     for (const file of files) {
       let working = fs.readFileSync(file, { encoding: 'utf8' })
+      working = renderLoops(list, dict, working)
       for (const key in dict) {
         working = working.replaceAll(`{{ ${key} }}`, dict[key])
         working = renderSwatches(list, working)

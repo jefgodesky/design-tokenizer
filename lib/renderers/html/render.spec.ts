@@ -8,15 +8,17 @@ describe('renderHTML', () => {
   let renderHTML: Function
 
   beforeEach(async () => {
-    vol.fromJSON({
+    const sources = {
       '/html/src/index.html': '<!DOCTYPE html><html><head><title>Test</title></head><body>{{ color.green.hex }}</body></html>',
+      '/html/src/list.html': '<!DOCTYPE html><html><head><title>List Test</title></head><body><ul>{{ for color.* }}<li>{{ hex }}</li>{{ endfor }}</ul></body></html>',
       '/html/src/swatches.html': '<!DOCTYPE html><html><head><title>Swatches Test</title><body><h1>Primary Colors</h1>{{ swatches.color.primary }}<h1>Secondary Colors</h1>{{ swatches.color.secondary }}</body></head></html>'
-    })
+    }
+    vol.fromJSON(sources)
     memfs.mkdirSync('/html/dist', { recursive: true })
     renderHTML = await esmock('./render.js', {
       fs: memfs,
       './get-in-out-dir.js': () => ({ indir: '/html/src', outdir: '/html/dist' }),
-      './get-html-sources.js': () => ['/html/src/index.html', '/html/src/swatches.html']
+      './get-html-sources.js': () => Object.keys(sources)
     })
   })
 
@@ -35,6 +37,13 @@ describe('renderHTML', () => {
     renderHTML(list, { indir: '/html/src', outdir: '/html/dist', add, verbose: false, base: '/' })
     const actual = memfs.readFileSync('/html/dist/index.html', { encoding: 'utf8' })
     expect(actual).to.equal('<!DOCTYPE html><html><head><title>Test</title></head><body>#008800</body></html>')
+  })
+
+  it('can render loops', () => {
+    const list: DerefTokenList = { 'color.green': { $type: 'color', $value: '#008800' } }
+    renderHTML(list, { indir: '/html/src', outdir: '/html/dist', verbose: false, base: '/' })
+    const actual = memfs.readFileSync('/html/dist/list.html', { encoding: 'utf8' })
+    expect(actual).to.equal('<!DOCTYPE html><html><head><title>List Test</title></head><body><ul><li>#008800</li></ul></body></html>')
   })
 
   it('can render custom swatch sets', () => {

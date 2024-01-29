@@ -257,12 +257,12 @@ blue, and alpha) value for the color. The red,
 green, and blue values are on a scale from 0 to
 255, while alpha is on a scale from 0 to 1.
 
-### `{{ VAR.cmyk }}`
+### `{{ VAR.cmyka }}`
 
 **Token Types:** Color tokens and the color
 property of border, gradient, and shadow tokens.
 
-This variable provides the CMYK (cyan, magenta,
+This variable provides the CMYKA (cyan, magenta,
 yellow, black, and alpha) value for the color.
 The cyan, magenta, yellow, and black values are
 on a scale from 0 to 100, while alpha is on a

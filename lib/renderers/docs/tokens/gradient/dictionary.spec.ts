@@ -25,7 +25,6 @@ describe('addGradientToDictionary', () => {
 
   it('adds the hex color for each stop to the dictionary', () => {
     const actual = addGradientToDictionary('gradient.monochrome', token, before)
-    console.log(actual)
     expect(actual['gradient.monochrome.0.color.hex']).to.equal('#000000')
     expect(actual['gradient.monochrome.1.color.hex']).to.equal('#ffffff')
   })

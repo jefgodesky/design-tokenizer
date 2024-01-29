@@ -5,6 +5,7 @@ import getInOutDir from './get-in-out-dir.js'
 import getDictionary from '../docs/dictionary.js'
 import getSwatches from './swatches.js'
 import addContrastReportToDict from './contrast-report-dict.js'
+import renderSwatches from './swatches-custom.js'
 
 const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: string, add?: Dictionary, verbose?: boolean, base?: string } = { verbose: true }): void => {
   try {
@@ -21,15 +22,7 @@ const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: st
       let working = fs.readFileSync(`${indir}/${filename}`, { encoding: 'utf8' })
       for (const key in dict) {
         working = working.replaceAll(`{{ ${key} }}`, dict[key])
-
-        // Render custom swatch sets
-        const regex = /{{ swatches\.(.*?) }}/
-        const customSwatches = working.match(new RegExp(regex, 'gm'))?.map(m => m.match(regex))
-        if (customSwatches !== undefined && customSwatches !== null) {
-          for (const ref of customSwatches) {
-            if (ref !== null) working = working.replace(ref[0], getSwatches(list, ref[1]))
-          }
-        }
+        working = renderSwatches(list, working)
       }
 
       fs.writeFileSync(`${outdir}/${filename}`, working, { encoding: 'utf8' })

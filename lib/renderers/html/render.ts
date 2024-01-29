@@ -1,44 +1,29 @@
-import { readdirSync, readFileSync, writeFileSync } from 'fs'
+import fs from 'fs'
+import { join } from 'path'
 import DerefTokenList from '../../types/deref-token-list.js'
 import Dictionary from '../../types/dictionary.js'
 import getDictionary from '../docs/dictionary.js'
 import getSwatches from './swatches.js'
-import getContrastReport from './contrast-report.js'
+import addContrastReportToDict from './contrast-report-dict.js'
 
-const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: string, add?: Dictionary, verbose?: boolean } = { verbose: true }): void => {
-  const { indir, outdir, add, verbose } = options
-  const dict = getDictionary(list, add)
+const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: string, add?: Dictionary, verbose?: boolean, base?: string } = { verbose: true }): void => {
+  const { add, verbose } = options
+  const base: string = options.base ?? process.cwd()
+  const indir: string = join(base, options.indir ?? 'src')
+  const outdir: string = join(base, options.outdir ?? 'dist')
+  const dict = addContrastReportToDict(getDictionary(list, add), list)
   dict.swatches = getSwatches(list)
-  dict['color-contrast'] = getContrastReport(list)
-  dict['color-contrast.skip-aa'] = getContrastReport(list, { normal: 'aa' }, ['aa'])
-  dict['color-contrast.skip-aaa'] = getContrastReport(list, { normal: 'aa' }, ['aaa'])
-  dict['color-contrast.skip-table'] = getContrastReport(list, { normal: 'aa' }, ['aa', 'aaa'])
-  dict['color-contrast.normal.aa'] = getContrastReport(list, { normal: 'aa' })
-  dict['color-contrast.normal.aa.skip-aa'] = getContrastReport(list, { normal: 'aa' }, ['aa'])
-  dict['color-contrast.normal.aa.skip-aaa'] = getContrastReport(list, { normal: 'aa' }, ['aaa'])
-  dict['color-contrast.normal.aa.skip-table'] = getContrastReport(list, { normal: 'aa' }, ['aa', 'aaa'])
-  dict['color-contrast.normal.aaa'] = getContrastReport(list, { normal: 'aaa' })
-  dict['color-contrast.normal.aaa.skip-aa'] = getContrastReport(list, { normal: 'aaa' }, ['aa'])
-  dict['color-contrast.normal.aaa.skip-aaa'] = getContrastReport(list, { normal: 'aaa' }, ['aaa'])
-  dict['color-contrast.normal.aaa.skip-table'] = getContrastReport(list, { normal: 'aaa' }, ['aa', 'aaa'])
-  dict['color-contrast.large.aa'] = getContrastReport(list, { large: 'aa' })
-  dict['color-contrast.large.aa.skip-aa'] = getContrastReport(list, { large: 'aa' }, ['aa'])
-  dict['color-contrast.large.aa.skip-aaa'] = getContrastReport(list, { large: 'aa' }, ['aaa'])
-  dict['color-contrast.large.aa.skip-table'] = getContrastReport(list, { large: 'aa' }, ['aa', 'aaa'])
-  dict['color-contrast.large.aaa'] = getContrastReport(list, { large: 'aaa' })
-  dict['color-contrast.large.aaa.skip-aa'] = getContrastReport(list, { large: 'aaa' }, ['aa'])
-  dict['color-contrast.large.aaa.skip-aaa'] = getContrastReport(list, { large: 'aaa' }, ['aaa'])
-  dict['color-contrast.large.aaa.skip-table'] = getContrastReport(list, { large: 'aaa' }, ['aa', 'aaa'])
 
   if (indir === undefined) console.error('html: Error producing HTML: input directory is undefined.')
   if (outdir === undefined) console.error('html: Error producing HTML: output directory is undefined.')
   if (indir === undefined || outdir === undefined) return
 
-  const allFiles = readdirSync(indir, { withFileTypes: true })
+  const allFiles = fs.readdirSync(indir, { withFileTypes: true })
   const files = allFiles.filter(file => /.*\.html?/i.test(file.name))
 
   for (const file of files) {
-    let working = readFileSync(`${indir}/${file.name}`, { encoding: 'utf8' })
+    const filename: string = file.name as string
+    let working = fs.readFileSync(`${indir}/${filename}`, { encoding: 'utf8' })
     for (const key in dict) {
       working = working.replaceAll(`{{ ${key} }}`, dict[key])
 
@@ -52,8 +37,8 @@ const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: st
       }
     }
 
-    writeFileSync(`${outdir}/${file.name}`, working, { encoding: 'utf8' })
-    if (verbose !== false) console.log(`html: Generating ${outdir}/${file.name}`)
+    fs.writeFileSync(`${outdir}/${filename}`, working, { encoding: 'utf8' })
+    if (verbose !== false) console.log(`html: Generating ${outdir}/${filename}`)
   }
 }
 

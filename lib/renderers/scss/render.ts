@@ -1,4 +1,5 @@
-import { writeFileSync } from 'fs'
+import fs from 'fs'
+import { join } from 'path'
 import DerefTokenList from '../../types/deref-token-list.js'
 
 import renderColorToken from './tokens/color.js'
@@ -34,10 +35,11 @@ const renderer: { [key: string]: Function } = {
   typography: renderTypographyToken
 }
 
-const renderSCSS = (list: DerefTokenList, verbose: boolean = true): void => {
+const renderSCSS = (list: DerefTokenList, verbose: boolean = true, base: string = process.cwd()): void => {
   const files = getFiles(list)
   const keys = Object.keys(list)
   for (const file of files) {
+    const path = join(base, file)
     const contents = keys.map(key => {
       const token = list[key]
       const { $type, $description } = token
@@ -46,7 +48,7 @@ const renderSCSS = (list: DerefTokenList, verbose: boolean = true): void => {
         ? `${renderer[$type](ext?.scss?.variable, token) as string} // ${$description as string ?? key}`
         : null
     }).filter((item): item is string => item !== null)
-    writeFileSync(file, contents.join('\n'), { encoding: 'utf8' })
+    fs.writeFileSync(path, contents.join('\n'), { encoding: 'utf8' })
     if (verbose) console.log(`scss: Generating ${file}`)
   }
 }

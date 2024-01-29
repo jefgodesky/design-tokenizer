@@ -14,7 +14,8 @@ describe('renderHTML', () => {
     })
     memfs.mkdirSync('/html/dist', { recursive: true })
     renderHTML = await esmock('./render.js', {
-      fs: memfs
+      fs: memfs,
+      './get-in-out-dir.js': () => ({ indir: '/html/src', outdir: '/html/dist' })
     })
   })
 

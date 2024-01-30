@@ -1,5 +1,5 @@
-import DerefTokenList from '../../types/deref-token-list'
-import getSwatches from './swatches'
+import DerefTokenList from '../../types/deref-token-list.js'
+import getSwatches from './swatches.js'
 
 const renderSwatches = (list: DerefTokenList, html: string): string => {
   let working = html

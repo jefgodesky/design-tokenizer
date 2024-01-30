@@ -1,7 +1,7 @@
 import { expect } from 'chai'
+import DerefTokenList from '../../types/deref-token-list.js'
 import getDictionary from '../docs/dictionary.js'
 import renderLoops from './loops.js'
-import DerefTokenList from '../../types/deref-token-list'
 
 describe('renderLoops', () => {
   const list: DerefTokenList = {

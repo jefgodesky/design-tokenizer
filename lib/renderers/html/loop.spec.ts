@@ -19,6 +19,11 @@ describe('renderLoop', () => {
 
   const dict = getDictionary(list)
 
+  it('can render token names', () => {
+    const actual = renderLoop(list, dict, 'color.*', '[{{ name }}]')
+    expect(actual).to.equal('[color.black][color.white]')
+  })
+
   it('can render token descriptions', () => {
     const actual = renderLoop(list, dict, 'color.*', '[{{ description }}]')
     expect(actual).to.equal('[Black][White]')

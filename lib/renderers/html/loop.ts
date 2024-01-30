@@ -11,7 +11,7 @@ const renderLoop = (list: DerefTokenList, dict: Dictionary, pattern: string, tem
       'offset.y', 'blur', 'spread', 'duration', 'delay', 'timing',
       'timing.url', 'family', 'size', 'weight', 'spacing.letter',
       'spacing.line', 'spacing.line.abs', 'style']
-    const values: { [key: string]: string } = {}
+    const values: { [key: string]: string } = { name: key }
     for (const v of vars) {
       values[v] = dict[key + '.' + v] ?? ''
     }

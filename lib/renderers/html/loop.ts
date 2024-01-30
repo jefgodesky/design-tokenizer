@@ -1,5 +1,5 @@
 import DerefTokenList from '../../types/deref-token-list.js'
-import Dictionary from '../docs/dictionary.js'
+import Dictionary from '../../types/dictionary.js'
 import getMatchingTokens from '../docs/get-matching-tokens.js'
 
 const renderLoop = (list: DerefTokenList, dict: Dictionary, pattern: string, template: string): string => {

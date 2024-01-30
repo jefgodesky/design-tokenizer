@@ -1,5 +1,5 @@
 import DerefTokenList from '../../types/deref-token-list.js'
-import Dictionary from '../docs/dictionary.js'
+import Dictionary from '../../types/dictionary.js'
 import renderLoop from './loop.js'
 
 const renderLoops = (list: DerefTokenList, dict: Dictionary, html: string): string => {
@@ -8,7 +8,9 @@ const renderLoops = (list: DerefTokenList, dict: Dictionary, html: string): stri
   if (matches === null) return html
 
   for (const match of matches) {
-    const [full, pattern, template] = match.match(regex)
+    const result = match.match(regex)
+    if (result === null) continue
+    const [full, pattern, template] = result
     const rendered = renderLoop(list, dict, pattern, template)
     html = html.replace(full, rendered)
   }

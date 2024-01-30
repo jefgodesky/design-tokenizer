@@ -496,6 +496,51 @@ instead of `1.2`). For the original ratio, use
 This variable provides the font style from
 a typography token.
 
+### `{{ for PATTERN }}`
+
+You can loop over all the tokens that share
+the pattern `PATTERN`, repeating what occurs
+between `{{ for PATTERN }}` and `{{ endfor }}`
+for each token. For example:
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>SCSS Variable</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ for color.* }}
+    <tr>
+      <td>{{ name }}</td>
+      <td>{{ scss }}</td>
+    </tr>
+    {{ endfor }}
+  </tbody>
+</table>
+```
+
+This would create a table of all of the
+tokens with names that begin with `color.`,
+displaying the name of the token and the
+SCSS variable name (_see_ `{{ VAR.scss }}`,
+above) for each one.
+
+You can use most of the variables described
+above within the `for` loop (dropping the
+`VAR.` prefix) to display the corresponding
+value for each token. The exceptions are
+the `{{ VAR.TYPEFACE }}`and gradient values,
+since they don’t really lend themselves to the
+repeatable patterns needed for a loop like this.
+
+In addition to those, you also have access to
+the `{{ name }}` variable, which provides the
+name of the token (which you would otherwise
+provide as `VAR`).
+
 ### `{{ swatches }}`
 
 **Token Types:** N/A

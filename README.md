@@ -541,6 +541,20 @@ the `{{ name }}` variable, which provides the
 name of the token (which you would otherwise
 provide as `VAR`).
 
+You also have access to the `{{ value }}`
+variable for several types of tokens, though
+what it means will vary by token type.
+
+| Token Type    | `{{ value }}`                                                                |
+|---------------|------------------------------------------------------------------------------|
+ | `dimension`   | The dimension’s `$value`                                                     |
+ | `duration`    | The duration’s `$value`                                                      |
+ | `cubicBezier` | The cubic Bézier’s `$value` as a comma-separated string (e.g., `0, 0, 0, 0`) |
+ | `fontFamily`  | The font family’s `$value` (also available as `{{ family }}`)                |
+ | `fontWeight`  | The font weight's `$value` (also available as `{{ weight }}`)                |
+ | `number`      | The number’s `$value`                                                        |
+
+
 ### `{{ swatches }}`
 
 **Token Types:** N/A

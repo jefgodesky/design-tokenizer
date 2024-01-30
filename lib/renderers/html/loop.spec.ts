@@ -14,7 +14,11 @@ describe('renderLoop', () => {
     'shadow.standard': { $type: 'shadow', $value: { color: '#00000080', offsetX: '0.5rem', offsetY: '0.5rem', blur: '1.5rem', spread: '0rem' } },
     'transition.short': { $type: 'transition', $value: { duration: '200ms', delay: '0ms', timingFunction: [0, 0, 0, 0] } },
     'type.body': { $type: 'typography', $value: { fontFamily: 'Helvetica', fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0rem', lineHeight: 1.2 } },
-    'type.italicized': { $type: 'typography', $value: { fontFamily: ['Helvetica', 'sans-serif'], fontSize: '1rem', fontStyle: 'italic', fontWeight: 'normal', letterSpacing: '0rem', lineHeight: 1.2 } }
+    'type.italicized': { $type: 'typography', $value: { fontFamily: ['Helvetica', 'sans-serif'], fontSize: '1rem', fontStyle: 'italic', fontWeight: 'normal', letterSpacing: '0rem', lineHeight: 1.2 } },
+    'families.helvetica': { $type: 'fontFamily', $value: 'Helvetica' },
+    'weights.normal': { $type: 'fontWeight', $value: 'normal' },
+    'duration.instant': { $type: 'duration', $value: '0ms' },
+    'numbers.zero': { $type: 'number', $value: 0 }
   }
 
   const dict = getDictionary(list)
@@ -27,6 +31,46 @@ describe('renderLoop', () => {
   it('can render token descriptions', () => {
     const actual = renderLoop(list, dict, 'color.*', '[{{ description }}]')
     expect(actual).to.equal('[Black][White]')
+  })
+
+  it('can render the value of a dimension token', () => {
+    const actual = renderLoop(list, dict, 'spacing.*', '[{{ value }}]')
+    expect(actual).to.equal('[1rem]')
+  })
+
+  it('can render the value of a duration token', () => {
+    const actual = renderLoop(list, dict, 'duration.*', '[{{ value }}]')
+    expect(actual).to.equal('[0ms]')
+  })
+
+  it('can render the value of a cubic Bézier token', () => {
+    const actual = renderLoop(list, dict, 'curves.*', '[{{ value }}]')
+    expect(actual).to.equal('[0, 0, 0, 0]')
+  })
+
+  it('can render the value of a font family token (value)', () => {
+    const actual = renderLoop(list, dict, 'families.*', '[{{ value }}]')
+    expect(actual).to.equal('[Helvetica]')
+  })
+
+  it('can render the value of a font family token (family)', () => {
+    const actual = renderLoop(list, dict, 'families.*', '[{{ family }}]')
+    expect(actual).to.equal('[Helvetica]')
+  })
+
+  it('can render the value of a font weight token (value)', () => {
+    const actual = renderLoop(list, dict, 'weights.*', '[{{ value }}]')
+    expect(actual).to.equal('[normal]')
+  })
+
+  it('can render the value of a font weight token (family)', () => {
+    const actual = renderLoop(list, dict, 'weights.*', '[{{ weight }}]')
+    expect(actual).to.equal('[normal]')
+  })
+
+  it('can render the value of a number token', () => {
+    const actual = renderLoop(list, dict, 'numbers.*', '[{{ value }}]')
+    expect(actual).to.equal('[0]')
   })
 
   it('can render SCSS variables', () => {

@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { dirname } from 'path'
 import DerefTokenList from '../../types/deref-token-list.js'
 import Dictionary from '../../types/dictionary.js'
 import getInOutDir from './get-in-out-dir.js'
@@ -25,6 +26,7 @@ const renderHTML = (list: DerefTokenList, options: { indir?: string, outdir?: st
       }
 
       const outpath = file.replace(indir, outdir)
+      fs.mkdirSync(dirname(outpath), { recursive: true })
       fs.writeFileSync(outpath, working, { encoding: 'utf8' })
       if (verbose !== false) console.log(`html: Generating ${outdir}/${file}`)
     }

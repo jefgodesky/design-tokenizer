@@ -1,6 +1,5 @@
 import { expect } from 'chai'
-import DerefTypographyToken from '../types/tokens/dereferenced/typography.js'
-import resolveReferences from './resolve-references.js'
+import resolveReference from './resolve-reference.js'
 
 describe('resolveReferences', () => {
   const tokens = {
@@ -11,10 +10,11 @@ describe('resolveReferences', () => {
     'type.heading': { $type: 'typography', $value: { fontFamily: '{font.family.sans}', fontSize: '1rem', fontWeight: 'normal', letterSpacing: '0rem', lineHeight: 1.2 } }
   }
 
-  it('resolves references in a flat token dictionary', () => {
-    const actual = resolveReferences(tokens)
-    expect(actual['color.accent'].$value).to.equal(tokens['color.green'].$value)
-    expect(actual['color.accent2'].$value).to.equal(tokens['color.green'].$value)
-    expect((actual['type.heading'] as DerefTypographyToken).$value.fontFamily[0]).to.equal(tokens['font.family.sans'].$value[0])
+  it('resolves references', () => {
+    expect(resolveReference(tokens, '{color.green}')).to.equal(tokens['color.green'].$value)
+  })
+
+  it('resolves nested references', () => {
+    expect(resolveReference(tokens, '{color.accent}')).to.equal(tokens['color.green'].$value)
   })
 })

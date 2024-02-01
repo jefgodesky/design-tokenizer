@@ -1,19 +1,19 @@
 import rfdc from 'rfdc'
-import Token from '../types/token.js'
 import DerefTokenList from '../types/deref-token-list.js'
 import { isReference } from '../types/basic/reference.js'
+import resolveReference from './resolve-reference.js'
 
 const clone = rfdc()
 
-const resolveReferences = (dictionary: any, working?: any): DerefTokenList => {
-  const cpy = working ?? clone(dictionary)
+const resolveReferences = (dictionary: any): DerefTokenList => {
+  const cpy = clone(dictionary)
   for (const key in cpy) {
-    const ref = isReference(cpy[key]) ? cpy[key] as string : null
-    cpy[key] = ref !== null
-      ? clone((dictionary[ref.substring(1, ref.length - 1)] as Token).$value)
-      : typeof cpy[key] === 'object' && Object.keys(cpy[key]).length > 0
-        ? resolveReferences(dictionary, cpy[key])
-        : cpy[key]
+    if (isReference(cpy[key].$value)) cpy[key].$value = resolveReference(cpy, cpy[key].$value as string)
+    if (cpy[key].$value instanceof Object) {
+      for (const k in cpy[key].$value) {
+        if (isReference(cpy[key].$value[k])) cpy[key].$value[k] = resolveReference(cpy, cpy[key].$value[k] as string)
+      }
+    }
   }
   return cpy
 }
